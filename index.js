@@ -6,8 +6,11 @@ class Todo {
     this.priority = priority
     this.notes = notes
     this.checklist = checklist
+    this.complete = false
   }
 }
+
+const completeTodo = (todo) => (todo.complete = true)
 
 const todo1 = new Todo(
   'clear gmail/action needed',
@@ -25,5 +28,6 @@ const todo2 = new Todo(
   '',
   ''
 )
+completeTodo(todo2)
 console.log(todo1)
 console.log(todo2)
