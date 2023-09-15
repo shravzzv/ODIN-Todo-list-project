@@ -1,6 +1,6 @@
-import completeTodo from './completeTodo'
-import addTodoToList from './addTodoToList'
-import changeTodoPriority from './changeTodoPriority'
+import completeTodo from './completeTodo.js'
+import addTodoToList from './addTodoToList.js'
+import changeTodoPriority from './changeTodoPriority.js'
 
 class Todo {
   constructor(title, desc, due, priority, notes, checklist) {

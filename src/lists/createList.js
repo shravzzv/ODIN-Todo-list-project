@@ -1,4 +1,4 @@
-import removeTodoFromList from './removeTodoFromList'
+import removeTodoFromList from './removeTodoFromList.js'
 
 class List {
   constructor(title) {
