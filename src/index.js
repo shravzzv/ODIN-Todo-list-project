@@ -1,3 +1,5 @@
+import 'normalize.css'
+import './styles/global.css'
 import Todo from './todos/createTodo'
 import List from './lists/createList'
 
