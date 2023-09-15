@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/shravzzv/ODIN-Todo-list-project/issues"
   },
-  "homepage": "https://github.com/shravzzv/ODIN-Todo-list-project#readme"
+  "homepage": "https://github.com/shravzzv/ODIN-Todo-list-project#readme",
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
 }
