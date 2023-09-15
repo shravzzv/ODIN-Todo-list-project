@@ -8,6 +8,10 @@ class Todo {
     this.checklist = checklist
     this.complete = false
   }
+
+  markComplete() {
+    completeTodo(this)
+  }
 }
 
 const completeTodo = (todo) => (todo.complete = true)
@@ -28,6 +32,6 @@ const todo2 = new Todo(
   '',
   ''
 )
-completeTodo(todo2)
+todo1.markComplete()
 console.log(todo1)
 console.log(todo2)
