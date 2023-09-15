@@ -1,0 +1,24 @@
+{
+  "name": "odin-todo-list-project",
+  "version": "1.0.0",
+  "description": "Todo lists are a staple in beginning webdev tutorials because they can be very simple. There is, however, a lot of room for improvement and many features that can be added.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shravzzv/ODIN-Todo-list-project.git"
+  },
+  "author": "Sai Shravan <shravzzv@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shravzzv/ODIN-Todo-list-project/issues"
+  },
+  "homepage": "https://github.com/shravzzv/ODIN-Todo-list-project#readme",
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
