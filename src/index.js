@@ -18,9 +18,17 @@ class Todo {
   addToList(list) {
     addTodoToList(this, list)
   }
+
+  changePriority(newPriority) {
+    changeTodoPriority(this, newPriority)
+  }
 }
 
 const completeTodo = (todo) => (todo.complete = true)
+
+const changeTodoPriority = (todo, newPriority) => {
+  todo.priority = newPriority
+}
 
 const addTodoToList = (todo, list) => {
   todo.list = list.title
@@ -55,3 +63,5 @@ todo1.addToList(inbox)
 todo2.addToList(work)
 
 work.removeTodo(todo2)
+
+console.log(todo1)
