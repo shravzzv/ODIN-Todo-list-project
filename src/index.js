@@ -1,5 +1,5 @@
-import Todo from './todos/createTodo.js'
-import List from './lists/createList.js'
+import Todo from './todos/createTodo'
+import List from './lists/createList'
 
 const todo1 = new Todo('clear gmail', '', new Date(), 1, '', '')
 const todo2 = new Todo('take out trash', '', new Date('2023-09-15'), 3, '', '')
