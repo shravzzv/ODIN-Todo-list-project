@@ -1,0 +1,24 @@
+.sidebar {
+  padding: 1em;
+}
+
+.sidebar > h3 {
+  padding: 0.5em;
+  margin: 0;
+}
+
+.sidebar > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar > ul > li {
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 0.75em;
+}
+
+.sidebar > ul > li:hover {
+  background-color: lightgray;
+}
