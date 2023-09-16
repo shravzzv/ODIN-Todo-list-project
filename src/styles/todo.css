@@ -1,0 +1,5 @@
+.todo {
+  background-color: var(--bg-clr-prm);
+  border-radius: 1em;
+  padding: 1em 2em;
+}
