@@ -102,3 +102,51 @@ img {
   color: var(--addBtn-clr);
   background-color: var(--addBtn-bg-clr);
 }
+
+/* short todo */
+.shortTodo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.5em;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 1em;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.shortTodo > span {
+  border: 2px solid #000;
+  width: 28px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.shortTodo > div {
+  width: 100%;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 0.15em;
+}
+
+.desc {
+  margin: 0.5em 0 0.5em;
+}
+
+.subContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.subContainer > button {
+  background-color: var(--bg-clr-prm);
+  color: var(--txt-clr-prm);
+  border: none;
+  border-radius: var(--bdr-radius-prm);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 0.5em;
+}
