@@ -67,6 +67,10 @@ img {
   gap: 1em;
   padding: 0em 1em;
   overflow-x: scroll;
+  position: sticky;
+  top: 0;
+  padding: 1em;
+  background-color: var(--bg-clr-prm);
 }
 
 .tabs > button {
