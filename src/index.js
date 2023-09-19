@@ -1,13 +1,16 @@
 import 'normalize.css'
-import './styles/global.css'
+import './styles/main.css'
 import Todo from './todos/createTodo'
 import List from './lists/createList'
-import sidebar from './components/sidebar'
-import panel from './components/panel'
-
-const content = document.querySelector('#content')
+import Logo from './components/logo'
+import Tabs from './components/tabs'
+import AddTodo from './components/addTodo'
+import Todos from './components/todos'
 
 document.addEventListener('DOMContentLoaded', () => {
-  content.appendChild(sidebar())
-  content.appendChild(panel())
+  const content = document.querySelector('#content')
+  content.appendChild(Logo())
+  content.appendChild(Tabs())
+  content.appendChild(AddTodo())
+  content.appendChild(Todos())
 })
