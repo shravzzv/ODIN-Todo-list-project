@@ -73,6 +73,17 @@ img {
   background-color: var(--bg-clr-prm);
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.tabs {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .tabs > button {
   background-color: var(--bg-clr-prm);
   color: var(--txt-clr-prm);

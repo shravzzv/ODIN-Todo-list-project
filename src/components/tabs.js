@@ -1,4 +1,4 @@
-const lists = ['inbox', 'personal', 'work']
+const lists = ['inbox', 'personal', 'work', 'grocery']
 
 const Tabs = () => {
   const element = document.createElement('div')
