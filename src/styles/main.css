@@ -5,6 +5,9 @@
 :root {
   --txt-clr-prm: black;
   --bg-clr-prm: white;
+  --addBtn-clr: white;
+  --addBtn-bg-clr: black;
+  --bdr-radius-prm: 10px;
 }
 
 body {
@@ -22,6 +25,8 @@ img {
   :root {
     --txt-clr-prm: white;
     --bg-clr-prm: #181a1b;
+    --addBtn-clr: black;
+    --addBtn-bg-clr: white;
   }
 }
 
@@ -66,9 +71,10 @@ img {
 
 .tabs > button {
   background-color: var(--bg-clr-prm);
+  color: var(--txt-clr-prm);
   border: 1px solid var(--txt-clr-prm);
-  border-radius: 0.25em;
-  padding: 0.25em;
+  border-radius: var(--bdr-radius-prm);
+  padding: 0.5em;
   text-transform: uppercase;
 }
 
@@ -93,4 +99,6 @@ img {
   font-size: 2rem;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: var(--addBtn-clr);
+  background-color: var(--addBtn-bg-clr);
 }
