@@ -37,7 +37,6 @@ img {
 
 /* logo */
 .logo {
-  border: 1px solid #000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,4 +51,32 @@ img {
 .logo > p {
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+/* tabs */
+
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  padding: 0em 1em;
+  overflow-x: scroll;
+}
+
+.tabs > button {
+  background-color: var(--bg-clr-prm);
+  border: 1px solid var(--txt-clr-prm);
+  border-radius: 0.25em;
+  padding: 0.25em;
+  text-transform: uppercase;
+}
+
+.tabs > button:hover {
+  background-color: var(--txt-clr-prm);
+  color: var(--bg-clr-prm);
+}
+
+.tabs > button:last-of-type {
+  padding: 0.25em 1em;
 }
