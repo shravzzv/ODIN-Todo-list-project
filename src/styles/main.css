@@ -60,6 +60,9 @@ img {
   justify-content: center;
   gap: 1em;
   margin: auto 1em;
+
+  position: sticky;
+  top: 10px;
 }
 
 .tabsContainer {
@@ -113,6 +116,7 @@ img {
   font-size: 1.5rem;
   background-color: var(--bg-clr-sec);
   color: var(--txt-clr-prm);
+  flex-shrink: 0;
 }
 
 .addListBtn:hover {
@@ -188,23 +192,23 @@ img {
 
 /* new List modal */
 .newListForm {
-  width: max-content;
   margin: auto;
   padding: 1em;
   background-color: var(--bg-clr-sec);
   border-radius: var(--bdr-radius-prm);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
-  max-width: 100%;
+  display: none;
 }
 
 .newListForm.show {
   position: absolute;
-  top: 200px;
-  left: 200px;
+  top: 50%; /* Vertically center */
+  left: 50%; /* Horizontally center */
+  transform: translate(-50%, -50%); /* Centering trick */
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
 }
 
 .newListForm > input {
