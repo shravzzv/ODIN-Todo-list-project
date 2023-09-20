@@ -3,13 +3,11 @@ import addTodoToList from './addTodoToList'
 import changeTodoPriority from './changeTodoPriority'
 
 class Todo {
-  constructor(title, desc, due, priority, notes, checklist) {
+  constructor(title, desc, due, priority) {
     this.title = title
     this.desc = desc
     this.due = due
     this.priority = priority
-    this.notes = notes
-    this.checklist = checklist
     this.complete = false
     this.list = 'inbox'
   }
