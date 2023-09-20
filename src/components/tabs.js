@@ -1,20 +1,22 @@
-const lists = ['inbox', 'personal', 'work', 'grocery']
-
-const Tabs = () => {
+const Tabs = (lists) => {
   const element = document.createElement('div')
   element.className = 'tabs'
+
+  const tabsContainer = document.createElement('div')
+  tabsContainer.className = 'tabsContainer'
+  element.appendChild(tabsContainer)
 
   lists.forEach((list) => {
     const tab = document.createElement('button')
     tab.className = 'tab'
     tab.textContent = list
-    element.appendChild(tab)
+    tabsContainer.appendChild(tab)
   })
 
-  const addList = document.createElement('button')
-  addList.className = 'addBtn'
-  addList.textContent = '+'
-  element.appendChild(addList)
+  const addListBtn = document.createElement('button')
+  addListBtn.className = 'addListBtn'
+  addListBtn.textContent = '+'
+  element.appendChild(addListBtn)
 
   return element
 }
