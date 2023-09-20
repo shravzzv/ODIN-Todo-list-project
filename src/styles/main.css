@@ -186,6 +186,61 @@ img {
   padding: 0.5em;
 }
 
+/* new List modal */
+.newListForm {
+  width: max-content;
+  margin: auto;
+  padding: 1em;
+  background-color: var(--bg-clr-sec);
+  border-radius: var(--bdr-radius-prm);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  max-width: 100%;
+}
+
+.newListForm.show {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+}
+
+.newListForm > input {
+  border-radius: var(--bdr-radius-prm);
+  background-color: var(--bg-clr-sec);
+  border: none;
+  outline: none;
+  color: var(--txt-clr-prm);
+  padding: 0.5em 0.25em;
+  line-height: 1;
+}
+
+.newListForm > button {
+  cursor: pointer;
+  background-color: var(--bg-clr-prm);
+  color: var(--txt-clr-prm);
+  border: 1px solid transparent;
+  border-radius: var(--bdr-radius-prm);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 0.5em;
+}
+
+.newListForm > button:hover {
+  transform: translateY(-2px);
+}
+
+.newListForm .submit {
+  background-color: green;
+  color: white;
+}
+
+.newListForm .cancel {
+  background-color: var(--bg-clr-prm);
+  color: var(--txt-clr-prm);
+}
+
 /* desktop styles */
 
 @media screen and (min-width: 768px) {
