@@ -7,17 +7,18 @@ import Tabs from './components/tabs'
 import AddTodo from './components/addTodo'
 import Todos from './components/todos'
 import NewListModal from './components/newListModal'
-
-const lists = ['inbox', 'personal']
+import NewTodoModal from './components/newTodoModal'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
+  const lists = ['inbox', 'personal']
 
   content.appendChild(Logo())
   content.appendChild(Tabs(lists))
   content.appendChild(AddTodo())
   content.appendChild(Todos())
   content.appendChild(NewListModal())
+  content.appendChild(NewTodoModal())
 
   const handleOpenNewListForm = (e) => {
     document.querySelector('.newListForm').classList.toggle('show')
@@ -48,6 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
     addListBtn.addEventListener('click', handleOpenNewListForm)
   }
 
+  const handleOpenNewTodoForm = (e) => {
+    document.querySelector('.newTodoForm').classList.toggle('show')
+    setTimeout(() => {
+      const input = document.querySelector('.newTodoForm>input:first-of-type')
+      if (input) {
+        input.focus()
+      }
+    }, 0)
+  }
+
+  const handleCloseNewTodoForm = (e) => {
+    document.querySelector('.newTodoForm').classList.toggle('show')
+  }
+
   const addListBtn = document.querySelector('.addListBtn')
   addListBtn.addEventListener('click', handleOpenNewListForm)
 
@@ -56,4 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newListForm = document.querySelector('.newListForm')
   newListForm.addEventListener('submit', handleListSubmit)
+
+  const addTodoBtn = document.querySelector('.addTodo')
+  addTodoBtn.addEventListener('click', handleOpenNewTodoForm)
+
+  const cancelNewTodoBtn = document.querySelector('.newTodoForm .cancel')
+  cancelNewTodoBtn.addEventListener('click', handleCloseNewTodoForm)
 })
