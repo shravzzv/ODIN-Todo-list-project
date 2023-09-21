@@ -12,11 +12,19 @@ import NewTodoModal from './components/newTodoModal'
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
   const lists = ['inbox', 'personal']
+  const todos = [
+    new Todo(
+      'Clear gmail',
+      `It's important to clear your inbox and this is some other text`,
+      new Date(),
+      '⭐'
+    ),
+  ]
 
   content.appendChild(Logo())
   content.appendChild(Tabs(lists))
   content.appendChild(AddTodo())
-  content.appendChild(Todos())
+  content.appendChild(Todos(todos))
   content.appendChild(NewListModal())
   content.appendChild(NewTodoModal())
 
@@ -50,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const handleOpenNewTodoForm = (e) => {
-    document.querySelector('.newTodoForm').classList.toggle('show')
+    document.querySelector('.newTodoForm').classList.add('show')
     setTimeout(() => {
       const input = document.querySelector('.newTodoForm>input:first-of-type')
       if (input) {
@@ -60,7 +68,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const handleCloseNewTodoForm = (e) => {
-    document.querySelector('.newTodoForm').classList.toggle('show')
+    document.querySelector('.newTodoForm').classList.remove('show')
+    e.target.form.reset()
+  }
+
+  const handleTodoSubmit = (e) => {
+    e.preventDefault()
+    document.querySelector('.newTodoForm').classList.remove('show')
+
+    const newTitle = e.target.elements.title.value
+    const newDesc = e.target.elements.description.value
+    const newDate = e.target.elements.date.value
+    const newPriority = e.target.elements.priority.value
+    const newTodo = new Todo(newTitle, newDesc, new Date(newDate), newPriority)
+    todos.push(newTodo)
+
+    const newTodos = Todos(todos)
+    document.querySelector('.todosContainer').remove()
+    content.appendChild(newTodos)
+
+    e.target.reset()
   }
 
   const addListBtn = document.querySelector('.addListBtn')
@@ -77,4 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const cancelNewTodoBtn = document.querySelector('.newTodoForm .cancel')
   cancelNewTodoBtn.addEventListener('click', handleCloseNewTodoForm)
+
+  const newTodoForm = document.querySelector('.newTodoForm')
+  newTodoForm.addEventListener('submit', handleTodoSubmit)
 })
