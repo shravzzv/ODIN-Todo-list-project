@@ -22,6 +22,33 @@ img {
   max-width: 100%;
 }
 
+input,
+textarea,
+select {
+  border-radius: var(--bdr-radius-prm);
+  background-color: var(--bg-clr-sec);
+  border: none;
+  outline: none;
+  color: var(--txt-clr-prm);
+  padding: 0.5em 0.25em;
+  line-height: 1;
+  width: 100%;
+  /* appearance: none; */
+}
+
+button {
+  cursor: pointer;
+  background-color: var(--bg-clr-prm);
+  color: var(--txt-clr-prm);
+  border-radius: var(--bdr-radius-prm);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 0.5em;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --txt-clr-prm: white;
@@ -119,6 +146,7 @@ img {
   background-color: var(--bg-clr-sec);
   color: var(--txt-clr-prm);
   flex-shrink: 0;
+  padding: 0;
 }
 
 .addListBtn:hover {
@@ -140,6 +168,7 @@ img {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   color: var(--addBtn-clr);
   background-color: var(--addBtn-bg-clr);
+  padding: 0;
 }
 
 /* short todo */
@@ -204,45 +233,89 @@ img {
 
 .newListForm.show {
   position: absolute;
-  top: 50%; /* Vertically center */
+  top: 30%; /* Vertically center */
   left: 50%; /* Horizontally center */
   transform: translate(-50%, -50%); /* Centering trick */
 
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
+  width: min(90%, 350px);
 }
 
-.newListForm > input {
-  border-radius: var(--bdr-radius-prm);
+/* new todo modal */
+.newTodoForm {
+  padding: 1em;
   background-color: var(--bg-clr-sec);
-  border: none;
-  outline: none;
-  color: var(--txt-clr-prm);
-  padding: 0.5em 0.25em;
-  line-height: 1;
-}
-
-.newListForm > button {
-  cursor: pointer;
-  background-color: var(--bg-clr-prm);
-  color: var(--txt-clr-prm);
-  border: 1px solid transparent;
   border-radius: var(--bdr-radius-prm);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  padding: 0.5em;
+  box-shadow: #0000003d 0px 3px 8px;
+  display: none;
 }
 
-.newListForm > button:hover {
-  transform: translateY(-2px);
+.newTodoForm.show {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centering trick */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: min(90%, 500px);
 }
 
-.newListForm .submit {
+.newTodoForm > input:first-of-type {
+  font-size: 1.75rem;
+  margin-bottom: 0.25em;
+}
+
+.newTodoForm > textarea {
+  resize: vertical;
+  margin-bottom: 1em;
+}
+
+.widgetsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  gap: 1em;
+}
+
+.widgetsContainer > * {
+  background-color: var(--bg-clr-prm);
+  box-shadow: #0000003d 0px 3px 8px;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+
+.widgetsContainer .date::before {
+  content: '📆';
+}
+
+.newTodoForm > .buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  width: 100%;
+}
+
+/* common to newListForm and newTodoForm */
+.newListForm > button,
+.newTodoForm button {
+  border: 1px solid transparent;
+}
+
+.newListForm .submit,
+.newTodoForm button[type='submit'] {
   background-color: green;
   color: white;
 }
 
-.newListForm .cancel {
+.newListForm .cancel,
+.newTodoForm button[type='button'] {
   background-color: var(--bg-clr-prm);
   color: var(--txt-clr-prm);
 }
@@ -266,5 +339,9 @@ img {
 
   .shortTodo {
     cursor: pointer;
+  }
+
+  .widgetsContainer .date::before {
+    content: '';
   }
 }

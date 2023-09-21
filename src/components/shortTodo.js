@@ -10,14 +10,14 @@ const ShortTodo = ({ title, desc, due, priority, list }) => {
   titleEl.className = 'title'
 
   const shortDesc = document.createElement('p')
-  shortDesc.textContent = desc.slice(0, 30) + '...'
+  shortDesc.textContent = desc.slice(0, 50) + '...'
   shortDesc.className = 'desc'
 
   const subContainer = document.createElement('div')
   subContainer.className = 'subContainer'
 
   const dateEl = document.createElement('button')
-  dateEl.textContent = due
+  dateEl.textContent = `${due.getDate()}:${due.getMonth()}`
   dateEl.className = 'date'
 
   const priorityEl = document.createElement('button')
