@@ -4,22 +4,31 @@ const NewTodoModal = () => {
 
   const titleInput = document.createElement('input')
   titleInput.placeholder = 'Title'
+  titleInput.name = 'title'
   titleInput.autofocus = true
+  titleInput.required = true
+  titleInput.minLength = '3'
+  titleInput.maxLength = '25'
 
   const descInput = document.createElement('textarea')
   descInput.placeholder = 'Description'
+  descInput.name = 'description'
   descInput.rows = 2
+  descInput.minLength = '10'
 
   const widgetsContainer = document.createElement('div')
   widgetsContainer.className = 'widgetsContainer'
 
   const dateInput = document.createElement('input')
   dateInput.type = 'datetime-local'
-  dateInput.className = 'date'
+  dateInput.name = 'date'
   dateInput.id = 'dateInput'
+  dateInput.className = 'date'
+  dateInput.required = true
 
   const priorityInput = document.createElement('select')
   priorityInput.name = 'Priority'
+  priorityInput.name = 'priority'
   priorityInput.className = 'priority'
 
   const priorities = [
