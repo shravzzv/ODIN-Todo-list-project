@@ -14,7 +14,7 @@ const NewTodoModal = () => {
   descInput.placeholder = 'Description'
   descInput.name = 'description'
   descInput.rows = 2
-  descInput.minLength = '10'
+  descInput.minLength = '5'
 
   const widgetsContainer = document.createElement('div')
   widgetsContainer.className = 'widgetsContainer'
