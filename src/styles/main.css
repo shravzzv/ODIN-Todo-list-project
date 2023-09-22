@@ -224,7 +224,7 @@ button:hover {
 }
 
 .newListForm.show {
-  position: absolute;
+  position: fixed;
   top: 30%; /* Vertically center */
   left: 50%; /* Horizontally center */
   transform: translate(-50%, -50%); /* Centering trick */
@@ -245,7 +245,7 @@ button:hover {
 }
 
 .newTodoForm.show {
-  position: absolute;
+  position: fixed;
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%); /* Centering trick */
@@ -324,7 +324,7 @@ button:hover {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: var(--bg-clr-sec);
 
-  position: absolute;
+  position: fixed;
   top: 10%;
   left: 50%;
   width: 90vw;
@@ -409,6 +409,10 @@ button:hover {
 
   .shortTodo {
     cursor: pointer;
+  }
+
+  .shortTodo:hover {
+    transform: translateY(-5px);
   }
 
   .widgetsContainer .date::before {
