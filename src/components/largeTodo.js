@@ -1,6 +1,6 @@
 const LargeTodo = ({ title, desc, due, priority, list }) => {
   const element = document.createElement('div')
-  element.className = 'largeTodo show'
+  element.className = 'largeTodo'
 
   const header = document.createElement('header')
 
@@ -11,7 +11,11 @@ const LargeTodo = ({ title, desc, due, priority, list }) => {
   editBtn.textContent = '📝'
 
   const delBtn = document.createElement('button')
-  delBtn.textContent = '❌'
+  delBtn.textContent = '🗑️'
+
+  const closeBtn = document.createElement('button')
+  closeBtn.textContent = '❌'
+  closeBtn.className = 'close'
 
   const main = document.createElement('main')
   const completeCircle = document.createElement('div')
@@ -23,7 +27,11 @@ const LargeTodo = ({ title, desc, due, priority, list }) => {
   titleEl.className = 'title'
 
   const descEl = document.createElement('p')
-  descEl.textContent = desc
+  if (desc.length < 1) {
+    descEl.style.visibility = 'hidden'
+  } else {
+    descEl.textContent = desc
+  }
   descEl.className = 'desc'
 
   const section = document.createElement('section')
@@ -44,6 +52,7 @@ const LargeTodo = ({ title, desc, due, priority, list }) => {
   header.appendChild(listEl)
   header.appendChild(editBtn)
   header.appendChild(delBtn)
+  header.appendChild(closeBtn)
 
   main.appendChild(completeCircle)
   main.appendChild(textContent)
