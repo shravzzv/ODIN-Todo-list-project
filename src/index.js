@@ -12,13 +12,67 @@ import LargeTodo from './components/largeTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
-  const lists = ['inbox', 'personal']
+  const lists = [new List('inbox'), new List('personal'), new List('work')]
   const todos = [
     new Todo(
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      `Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam voluptate qui ullam impedit inventore magni recusandae molestiae ipsa ex, ut sed magnam fugit harum in autem fugiat assumenda. Ipsam, fugiat.`,
-      new Date(),
+      'Complete project proposal',
+      'Hello, World!',
+      new Date('2023-09-30'),
+      '⭐⭐'
+    ),
+    new Todo(
+      'Read chapter 5 of Sapiens',
+      'Continue reading the fascinating book "Sapiens" by Yuval Noah Harari.',
+      new Date('2023-09-25'),
       '⭐'
+    ),
+    new Todo(
+      'Go for a jog',
+      'Get some exercise by going for a jog in the morning.',
+      new Date('2023-09-24'),
+      '⭐'
+    ),
+    new Todo(
+      'Learn about JavaScript promises',
+      'Dive deeper into JavaScript promises and asynchronous programming.',
+      new Date('2023-09-26'),
+      '⭐⭐⭐'
+    ),
+    new Todo(
+      'Write a blog post',
+      'Start writing a blog post about web development tips and tricks.',
+      new Date('2023-09-28'),
+      '⭐⭐'
+    ),
+    new Todo(
+      'Practice meditation',
+      'Set aside some time for meditation to relax and clear your mind.',
+      new Date('2023-09-27'),
+      '⭐'
+    ),
+    new Todo(
+      'Attend a networking event',
+      'Participate in a local networking event to meet potential collaborators.',
+      new Date('2023-09-29'),
+      '⭐⭐'
+    ),
+    new Todo(
+      'Study biology',
+      'Continue your study of biology and explore fascinating topics.',
+      new Date('2023-09-23'),
+      '⭐'
+    ),
+    new Todo(
+      'Work on a web development project',
+      'Spend time working on your web development project with JavaScript.',
+      new Date('2023-09-30'),
+      '⭐⭐⭐'
+    ),
+    new Todo(
+      'Connect with like-minded individuals',
+      'Take steps to find and connect with people who share your interests.',
+      new Date('2023-09-28'),
+      '⭐⭐'
     ),
   ]
 
@@ -28,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
   content.appendChild(Todos(todos))
 
   // non-statically positioned elements
-  content.appendChild(LargeTodo(todos[0]))
   content.appendChild(AddTodo())
   content.appendChild(NewListModal())
   content.appendChild(NewTodoModal())
@@ -52,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
     document.querySelector('.newListForm').classList.toggle('show')
     const newList = new List(e.target.elements[0].value)
-    lists.push(newList.title)
+    lists.push(newList)
     e.target.reset()
 
     const newTabs = Tabs(lists)
@@ -95,6 +148,23 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.reset()
   }
 
+  const handleCloseLargeTodo = (e) => {
+    document.querySelector('.largeTodo').classList.remove('show')
+    document.querySelector('.addTodo').style.visibility = 'visible'
+  }
+
+  const handleShortTodoClick = (todo) => {
+    const newLargeTodo = content.appendChild(LargeTodo(todo))
+
+    newLargeTodo.classList.add('show')
+
+    document.querySelector('.addTodo').style.visibility = 'hidden'
+
+    document
+      .querySelector('.largeTodo .close')
+      .addEventListener('click', handleCloseLargeTodo)
+  }
+
   const addListBtn = document.querySelector('.addListBtn')
   addListBtn.addEventListener('click', handleOpenNewListForm)
 
@@ -112,4 +182,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newTodoForm = document.querySelector('.newTodoForm')
   newTodoForm.addEventListener('submit', handleTodoSubmit)
+
+  const allShortTodoEls = document.querySelectorAll('.shortTodo')
+  Array.from(allShortTodoEls).forEach((shortTodo, index) => {
+    const todo = todos[index]
+    shortTodo.addEventListener('click', () => {
+      handleShortTodoClick(todo)
+    })
+  })
 })
