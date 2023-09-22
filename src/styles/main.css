@@ -415,6 +415,10 @@ button:hover {
     transform: scale(1.015);
   }
 
+  .largeTodo.show {
+    width: max-content;
+  }
+
   .widgetsContainer .date::before {
     content: '';
   }
