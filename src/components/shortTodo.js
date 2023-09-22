@@ -13,7 +13,7 @@ const ShortTodo = ({ title, desc, due, priority, list }) => {
   titleEl.className = 'title'
 
   const shortDesc = document.createElement('p')
-  shortDesc.textContent = desc.slice(0, 50) + '...'
+  shortDesc.textContent = desc.length > 55 ? desc.slice(0, 55) + '...' : desc
   shortDesc.className = 'desc'
 
   const subContainer = document.createElement('div')
