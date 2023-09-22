@@ -13,7 +13,11 @@ const ShortTodo = ({ title, desc, due, priority, list }) => {
   titleEl.className = 'title'
 
   const shortDesc = document.createElement('p')
-  shortDesc.textContent = desc.length > 55 ? desc.slice(0, 55) + '...' : desc
+  if (desc.length < 1) {
+    shortDesc.style.visibility = 'hidden'
+  } else {
+    shortDesc.textContent = desc.length > 55 ? desc.slice(0, 55) + '...' : desc
+  }
   shortDesc.className = 'desc'
 
   const subContainer = document.createElement('div')
