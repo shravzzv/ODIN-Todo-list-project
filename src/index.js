@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const handleCloseLargeTodo = (e) => {
     document.querySelector('.largeTodo').classList.remove('show')
     document.querySelector('.addTodo').style.visibility = 'visible'
+    document.querySelector('.tabs').style.visibility = 'visible'
   }
 
   const handleShortTodoClick = (todo) => {
@@ -159,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newLargeTodo.classList.add('show')
 
     document.querySelector('.addTodo').style.visibility = 'hidden'
+    document.querySelector('.tabs').style.visibility = 'hidden'
 
     document
       .querySelector('.largeTodo .close')
