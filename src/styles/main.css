@@ -311,6 +311,71 @@ button:hover {
   background-color: var(--bg-clr-prm);
   color: var(--txt-clr-prm);
 }
+
+/* largeTodo */
+.largeTodo {
+  display: none;
+}
+
+.largeTodo.show {
+  display: block;
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: var(--bg-clr-sec);
+
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 90vw;
+  height: max-content;
+  transform: translate(-50%);
+}
+
+.largeTodo > header {
+  border-bottom: 1px solid var(--txt-clr-prm);
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding-bottom: 1em;
+}
+
+.largeTodo > header > button {
+  border-color: transparent;
+}
+
+.largeTodo > header > button:first-of-type {
+  margin-right: auto;
+}
+
+.largeTodo > main {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+}
+
+.largeTodo .title {
+  margin-bottom: 0;
+}
+
+.largeTodo .desc {
+  opacity: 0.9;
+}
+
+.largeTodo .section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  margin: 1em;
+}
+
+.largeTodo .section button {
+  border: none;
+}
+
+/* check circle */
+
 .completeCircle {
   border: 2px solid var(--txt-clr-prm);
   width: 25px;
@@ -322,7 +387,7 @@ button:hover {
 }
 
 .completeCircle:hover {
-  background-color: var(--bg-clr-prm);
+  border-color: green;
 }
 
 /* desktop styles */

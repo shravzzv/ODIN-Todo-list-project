@@ -8,23 +8,28 @@ import AddTodo from './components/addTodo'
 import Todos from './components/todos'
 import NewListModal from './components/newListModal'
 import NewTodoModal from './components/newTodoModal'
+import LargeTodo from './components/largeTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
   const lists = ['inbox', 'personal']
   const todos = [
     new Todo(
-      'Clear gmail',
-      `It's important to clear your inbox and this is some other text`,
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      `Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam voluptate qui ullam impedit inventore magni recusandae molestiae ipsa ex, ut sed magnam fugit harum in autem fugiat assumenda. Ipsam, fugiat.`,
       new Date(),
       '⭐'
     ),
   ]
 
+  // statically positioned elements
   content.appendChild(Logo())
   content.appendChild(Tabs(lists))
-  content.appendChild(AddTodo())
   content.appendChild(Todos(todos))
+
+  // non-statically positioned elements
+  content.appendChild(LargeTodo(todos[0]))
+  content.appendChild(AddTodo())
   content.appendChild(NewListModal())
   content.appendChild(NewTodoModal())
 
