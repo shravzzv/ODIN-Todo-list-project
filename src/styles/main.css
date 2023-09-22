@@ -184,35 +184,27 @@ button:hover {
   background-color: var(--bg-clr-sec);
 }
 
-.shortTodo > span {
-  border: 2px solid var(--txt-clr-prm);
-  width: 28px;
-  height: 25px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.shortTodo > div {
+.shortTodo > .contents {
   width: 100%;
 }
 
-.title {
+.shortTodo .title {
   margin-top: 0;
   margin-bottom: 0.15em;
 }
 
-.desc {
+.shortTodo .desc {
   margin: 0.5em 0 0.5em;
 }
 
-.subContainer {
+.shortTodo .subContainer {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 1.5em;
 }
 
-.subContainer > button {
+.shortTodo .subContainer > button {
   background-color: var(--bg-clr-prm);
   color: var(--txt-clr-prm);
   border: none;
@@ -318,6 +310,19 @@ button:hover {
 .newTodoForm button[type='button'] {
   background-color: var(--bg-clr-prm);
   color: var(--txt-clr-prm);
+}
+.completeCircle {
+  border: 2px solid var(--txt-clr-prm);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.completeCircle:hover {
+  background-color: var(--bg-clr-prm);
 }
 
 /* desktop styles */

@@ -2,8 +2,11 @@ const ShortTodo = ({ title, desc, due, priority, list }) => {
   const element = document.createElement('div')
   element.className = 'shortTodo'
 
-  const compCircle = document.createElement('span')
+  const compCircle = document.createElement('div')
+  compCircle.className = 'completeCircle'
+
   const contents = document.createElement('div')
+  contents.className = 'contents'
 
   const titleEl = document.createElement('h2')
   titleEl.textContent = title
