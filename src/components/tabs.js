@@ -6,10 +6,10 @@ const Tabs = (lists) => {
   tabsContainer.className = 'tabsContainer'
   element.appendChild(tabsContainer)
 
-  lists.forEach((list) => {
+  lists.forEach(({ title }) => {
     const tab = document.createElement('button')
     tab.className = 'tab'
-    tab.textContent = list
+    tab.textContent = title
     tabsContainer.appendChild(tab)
   })
 

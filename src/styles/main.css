@@ -184,35 +184,27 @@ button:hover {
   background-color: var(--bg-clr-sec);
 }
 
-.shortTodo > span {
-  border: 2px solid var(--txt-clr-prm);
-  width: 28px;
-  height: 25px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.shortTodo > div {
+.shortTodo > .contents {
   width: 100%;
 }
 
-.title {
+.shortTodo .title {
   margin-top: 0;
   margin-bottom: 0.15em;
 }
 
-.desc {
+.shortTodo .desc {
   margin: 0.5em 0 0.5em;
 }
 
-.subContainer {
+.shortTodo .subContainer {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 1.5em;
 }
 
-.subContainer > button {
+.shortTodo .subContainer > button {
   background-color: var(--bg-clr-prm);
   color: var(--txt-clr-prm);
   border: none;
@@ -232,7 +224,7 @@ button:hover {
 }
 
 .newListForm.show {
-  position: absolute;
+  position: fixed;
   top: 30%; /* Vertically center */
   left: 50%; /* Horizontally center */
   transform: translate(-50%, -50%); /* Centering trick */
@@ -253,7 +245,7 @@ button:hover {
 }
 
 .newTodoForm.show {
-  position: absolute;
+  position: fixed;
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%); /* Centering trick */
@@ -320,6 +312,84 @@ button:hover {
   color: var(--txt-clr-prm);
 }
 
+/* largeTodo */
+.largeTodo {
+  display: none;
+}
+
+.largeTodo.show {
+  display: block;
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: var(--bg-clr-sec);
+
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  width: 90vw;
+  height: max-content;
+  transform: translate(-50%);
+}
+
+.largeTodo > header {
+  border-bottom: 1px solid var(--txt-clr-prm);
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding-bottom: 1em;
+}
+
+.largeTodo > header > button {
+  border-color: transparent;
+}
+
+.largeTodo > header > button:first-of-type {
+  margin-right: auto;
+}
+
+.largeTodo > main {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+}
+
+.largeTodo .title {
+  margin-bottom: 0;
+}
+
+.largeTodo .desc {
+  opacity: 0.9;
+}
+
+.largeTodo .section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  margin: 1em;
+}
+
+.largeTodo .section button {
+  border: none;
+}
+
+/* check circle */
+
+.completeCircle {
+  border: 2px solid var(--txt-clr-prm);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.completeCircle:hover {
+  border-color: green;
+}
+
 /* desktop styles */
 
 @media screen and (min-width: 768px) {
@@ -339,6 +409,14 @@ button:hover {
 
   .shortTodo {
     cursor: pointer;
+  }
+
+  .shortTodo:hover {
+    transform: scale(1.015);
+  }
+
+  .largeTodo.show {
+    width: max-content;
   }
 
   .widgetsContainer .date::before {

@@ -8,28 +8,89 @@ import AddTodo from './components/addTodo'
 import Todos from './components/todos'
 import NewListModal from './components/newListModal'
 import NewTodoModal from './components/newTodoModal'
+import ShortTodo from './components/shortTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
-  const lists = ['inbox', 'personal']
+  const lists = [new List('inbox'), new List('personal'), new List('work')]
   const todos = [
     new Todo(
-      'Clear gmail',
-      `It's important to clear your inbox and this is some other text`,
-      new Date(),
+      'Complete project proposal',
+      'Hello, World!',
+      new Date('2023-09-30'),
+      '⭐⭐'
+    ),
+    new Todo(
+      'Read chapter 5 of Sapiens',
+      'Continue reading the fascinating book "Sapiens" by Yuval Noah Harari.',
+      new Date('2023-09-25'),
       '⭐'
+    ),
+    new Todo(
+      'Go for a jog',
+      'Get some exercise by going for a jog in the morning.',
+      new Date('2023-09-24'),
+      '⭐'
+    ),
+    new Todo(
+      'Learn about JavaScript promises',
+      'Dive deeper into JavaScript promises and asynchronous programming.',
+      new Date('2023-09-26'),
+      '⭐⭐⭐'
+    ),
+    new Todo(
+      'Write a blog post',
+      'Start writing a blog post about web development tips and tricks.',
+      new Date('2023-09-28'),
+      '⭐⭐'
+    ),
+    new Todo(
+      'Practice meditation',
+      'Set aside some time for meditation to relax and clear your mind.',
+      new Date('2023-09-27'),
+      '⭐'
+    ),
+    new Todo(
+      'Attend a networking event',
+      'Participate in a local networking event to meet potential collaborators.',
+      new Date('2023-09-29'),
+      '⭐⭐'
+    ),
+    new Todo(
+      'Study biology',
+      'Continue your study of biology and explore fascinating topics.',
+      new Date('2023-09-23'),
+      '⭐'
+    ),
+    new Todo(
+      'Work on a web development project',
+      'Spend time working on your web development project with JavaScript.',
+      new Date('2023-09-30'),
+      '⭐⭐⭐'
+    ),
+    new Todo(
+      'Connect with like-minded individuals',
+      'Take steps to find and connect with people who share your interests.',
+      new Date('2023-09-28'),
+      '⭐⭐'
     ),
   ]
 
   content.appendChild(Logo())
+
   content.appendChild(Tabs(lists))
-  content.appendChild(AddTodo())
-  content.appendChild(Todos(todos))
   content.appendChild(NewListModal())
+
+  content.appendChild(Todos(todos))
   content.appendChild(NewTodoModal())
 
+  content.appendChild(AddTodo())
+
+  // event handlers
+
   const handleOpenNewListForm = (e) => {
-    document.querySelector('.newListForm').classList.toggle('show')
+    document.querySelector('.newListForm').classList.add('show')
+    // set autofocus on the input
     setTimeout(() => {
       const input = document.querySelector('.newListForm>input')
       if (input) {
@@ -39,26 +100,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const handleCloseNewListForm = (e) => {
-    document.querySelector('.newListForm').classList.toggle('show')
+    document.querySelector('.newListForm').classList.remove('show')
     e.target.form.reset()
   }
 
   const handleListSubmit = (e) => {
     e.preventDefault()
-    document.querySelector('.newListForm').classList.toggle('show')
-    const newList = new List(e.target.elements[0].value)
-    lists.push(newList.title)
-    e.target.reset()
 
-    const newTabs = Tabs(lists)
-    const tabsContainer = document.querySelector('.tabs')
-    tabsContainer.parentNode.replaceChild(newTabs, tabsContainer)
-    const addListBtn = document.querySelector('.addListBtn')
-    addListBtn.addEventListener('click', handleOpenNewListForm)
+    // hide the modal
+    document.querySelector('.newListForm').classList.remove('show')
+
+    // create new list using List class
+    const newList = new List(e.target.elements.tab.value)
+    lists.push(newList)
+
+    // add new .tab button inside .tabsContainer
+    const newTab = document.createElement('button')
+    newTab.className = 'tab'
+    newTab.textContent = newList.title
+    const tabsContainer = document.querySelector('.tabsContainer')
+    tabsContainer.appendChild(newTab)
+
+    // reset the form
+    e.target.reset()
   }
 
   const handleOpenNewTodoForm = (e) => {
     document.querySelector('.newTodoForm').classList.add('show')
+    // set autofocus on the title input
     setTimeout(() => {
       const input = document.querySelector('.newTodoForm>input:first-of-type')
       if (input) {
@@ -74,21 +143,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleTodoSubmit = (e) => {
     e.preventDefault()
+
+    // hide the modal
     document.querySelector('.newTodoForm').classList.remove('show')
 
+    // create new todo using class Todo
     const newTitle = e.target.elements.title.value
     const newDesc = e.target.elements.description.value
     const newDate = e.target.elements.date.value
     const newPriority = e.target.elements.priority.value
+
     const newTodo = new Todo(newTitle, newDesc, new Date(newDate), newPriority)
     todos.push(newTodo)
 
-    const newTodos = Todos(todos)
-    document.querySelector('.todosContainer').remove()
-    content.appendChild(newTodos)
+    // add a new .shortTodo inside .todosContainer
+    const newTodoEl = ShortTodo(newTodo)
+    document.querySelector('.todosContainer').appendChild(newTodoEl)
 
+    // reset the form
     e.target.reset()
   }
+
+  // event listeners
 
   const addListBtn = document.querySelector('.addListBtn')
   addListBtn.addEventListener('click', handleOpenNewListForm)
