@@ -9,6 +9,7 @@ import Todos from './components/todos'
 import NewListModal from './components/newListModal'
 import NewTodoModal from './components/newTodoModal'
 import LargeTodo from './components/largeTodo'
+import ShortTodo from './components/shortTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
@@ -82,9 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
   content.appendChild(NewListModal())
 
   content.appendChild(Todos(todos))
+  content.appendChild(NewTodoModal())
 
   content.appendChild(AddTodo())
-  content.appendChild(NewTodoModal())
 
   // event handlers
 
@@ -111,10 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.newListForm').classList.remove('show')
 
     // create new list using List class
-    const newList = new List(e.target.elements[0].value)
+    const newList = new List(e.target.elements.tab.value)
     lists.push(newList)
 
-    // add new .tab button inside .tabs container
+    // add new .tab button inside .tabsContainer
     const newTab = document.createElement('button')
     newTab.className = 'tab'
     newTab.textContent = newList.title
@@ -127,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleOpenNewTodoForm = (e) => {
     document.querySelector('.newTodoForm').classList.add('show')
+    // set autofocus on the title input
     setTimeout(() => {
       const input = document.querySelector('.newTodoForm>input:first-of-type')
       if (input) {
@@ -142,19 +144,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleTodoSubmit = (e) => {
     e.preventDefault()
+
+    // hide the modal
     document.querySelector('.newTodoForm').classList.remove('show')
 
+    // create new todo using class Todo
     const newTitle = e.target.elements.title.value
     const newDesc = e.target.elements.description.value
     const newDate = e.target.elements.date.value
     const newPriority = e.target.elements.priority.value
+
     const newTodo = new Todo(newTitle, newDesc, new Date(newDate), newPriority)
     todos.push(newTodo)
 
-    const newTodos = Todos(todos)
-    document.querySelector('.todosContainer').remove()
-    content.appendChild(newTodos)
+    // add a new .shortTodo inside .todosContainer
+    const newTodoEl = ShortTodo(newTodo)
+    document.querySelector('.todosContainer').appendChild(newTodoEl)
 
+    // reset the form
     e.target.reset()
   }
 
