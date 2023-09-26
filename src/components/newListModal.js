@@ -9,6 +9,7 @@ const NewListModal = () => {
   input.minLength = '3'
   input.required = true
   input.autofocus = true
+  input.name = 'tab'
 
   const submitBtn = document.createElement('button')
   submitBtn.type = 'submit'
