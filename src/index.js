@@ -8,7 +8,6 @@ import AddTodo from './components/addTodo'
 import Todos from './components/todos'
 import NewListModal from './components/newListModal'
 import NewTodoModal from './components/newTodoModal'
-import LargeTodo from './components/largeTodo'
 import ShortTodo from './components/shortTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -165,25 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.reset()
   }
 
-  const handleCloseLargeTodo = (e) => {
-    document.querySelector('.largeTodo').classList.remove('show')
-    document.querySelector('.addTodo').style.visibility = 'visible'
-    document.querySelector('.tabs').style.visibility = 'visible'
-  }
-
-  const handleShortTodoClick = (todo) => {
-    const newLargeTodo = content.appendChild(LargeTodo(todo))
-
-    newLargeTodo.classList.add('show')
-
-    document.querySelector('.addTodo').style.visibility = 'hidden'
-    document.querySelector('.tabs').style.visibility = 'hidden'
-
-    document
-      .querySelector('.largeTodo .close')
-      .addEventListener('click', handleCloseLargeTodo)
-  }
-
   // event listeners
 
   const addListBtn = document.querySelector('.addListBtn')
@@ -203,12 +183,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newTodoForm = document.querySelector('.newTodoForm')
   newTodoForm.addEventListener('submit', handleTodoSubmit)
-
-  const allShortTodoEls = document.querySelectorAll('.shortTodo')
-  Array.from(allShortTodoEls).forEach((shortTodo, index) => {
-    const todo = todos[index]
-    shortTodo.addEventListener('click', () => {
-      handleShortTodoClick(todo)
-    })
-  })
 })
