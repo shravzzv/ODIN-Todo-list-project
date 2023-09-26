@@ -76,18 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
     ),
   ]
 
-  // statically positioned elements
   content.appendChild(Logo())
+
   content.appendChild(Tabs(lists))
+  content.appendChild(NewListModal())
+
   content.appendChild(Todos(todos))
 
-  // non-statically positioned elements
   content.appendChild(AddTodo())
-  content.appendChild(NewListModal())
   content.appendChild(NewTodoModal())
 
+  // event handlers
+
   const handleOpenNewListForm = (e) => {
-    document.querySelector('.newListForm').classList.toggle('show')
+    document.querySelector('.newListForm').classList.add('show')
+    // set autofocus on the input
     setTimeout(() => {
       const input = document.querySelector('.newListForm>input')
       if (input) {
@@ -97,22 +100,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const handleCloseNewListForm = (e) => {
-    document.querySelector('.newListForm').classList.toggle('show')
+    document.querySelector('.newListForm').classList.remove('show')
     e.target.form.reset()
   }
 
   const handleListSubmit = (e) => {
     e.preventDefault()
-    document.querySelector('.newListForm').classList.toggle('show')
+
+    // hide the modal
+    document.querySelector('.newListForm').classList.remove('show')
+
+    // create new list using List class
     const newList = new List(e.target.elements[0].value)
     lists.push(newList)
-    e.target.reset()
 
-    const newTabs = Tabs(lists)
-    const tabsContainer = document.querySelector('.tabs')
-    tabsContainer.parentNode.replaceChild(newTabs, tabsContainer)
-    const addListBtn = document.querySelector('.addListBtn')
-    addListBtn.addEventListener('click', handleOpenNewListForm)
+    // add new .tab button inside .tabs container
+    const newTab = document.createElement('button')
+    newTab.className = 'tab'
+    newTab.textContent = newList.title
+    const tabsContainer = document.querySelector('.tabsContainer')
+    tabsContainer.appendChild(newTab)
+
+    // reset the form
+    e.target.reset()
   }
 
   const handleOpenNewTodoForm = (e) => {
@@ -166,6 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
       .querySelector('.largeTodo .close')
       .addEventListener('click', handleCloseLargeTodo)
   }
+
+  // event listeners
 
   const addListBtn = document.querySelector('.addListBtn')
   addListBtn.addEventListener('click', handleOpenNewListForm)
