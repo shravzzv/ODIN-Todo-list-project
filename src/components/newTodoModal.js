@@ -33,7 +33,7 @@ const NewTodoModal = () => {
 
   const priorities = [
     { value: '⭐', label: '⭐' },
-    { value: '⭐⭐', label: '⭐⭐', selected: true },
+    { value: '⭐⭐', label: '⭐⭐' },
     { value: '⭐⭐⭐', label: '⭐⭐⭐' },
   ]
 
