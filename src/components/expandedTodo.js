@@ -12,6 +12,7 @@ const ExpandedTodo = ({ title, desc, due, priority, list }) => {
 
   const delBtn = document.createElement('button')
   delBtn.textContent = '🗑️'
+  delBtn.className = 'delete'
 
   const closeBtn = document.createElement('button')
   closeBtn.textContent = '❌'
