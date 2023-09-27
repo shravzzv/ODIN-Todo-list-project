@@ -166,26 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.reset()
   }
 
-  // event listeners
-
-  const addListBtn = document.querySelector('.addListBtn')
-  addListBtn.addEventListener('click', handleOpenNewListForm)
-
-  const canceNewListBtn = document.querySelector('.newListForm .cancel')
-  canceNewListBtn.addEventListener('click', handleCloseNewListForm)
-
-  const newListForm = document.querySelector('.newListForm')
-  newListForm.addEventListener('submit', handleListSubmit)
-
-  const addTodoBtn = document.querySelector('.addTodo')
-  addTodoBtn.addEventListener('click', handleOpenNewTodoForm)
-
-  const cancelNewTodoBtn = document.querySelector('.newTodoForm .cancel')
-  cancelNewTodoBtn.addEventListener('click', handleCloseNewTodoForm)
-
-  const newTodoForm = document.querySelector('.newTodoForm')
-  newTodoForm.addEventListener('submit', handleTodoSubmit)
-
   const handleOpenTodo = (e) => {
     const index = Array.from(document.querySelectorAll('.shortTodo')).indexOf(
       e.currentTarget
@@ -243,6 +223,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteBtn = document.querySelector('.expTodo .delete')
     deleteBtn.addEventListener('click', handleDeleteTodo)
   }
+
+  // event listeners
+
+  const addListBtn = document.querySelector('.addListBtn')
+  addListBtn.addEventListener('click', handleOpenNewListForm)
+
+  const canceNewListBtn = document.querySelector('.newListForm .cancel')
+  canceNewListBtn.addEventListener('click', handleCloseNewListForm)
+
+  const newListForm = document.querySelector('.newListForm')
+  newListForm.addEventListener('submit', handleListSubmit)
+
+  const addTodoBtn = document.querySelector('.addTodo')
+  addTodoBtn.addEventListener('click', handleOpenNewTodoForm)
+
+  const cancelNewTodoBtn = document.querySelector('.newTodoForm .cancel')
+  cancelNewTodoBtn.addEventListener('click', handleCloseNewTodoForm)
+
+  const newTodoForm = document.querySelector('.newTodoForm')
+  newTodoForm.addEventListener('submit', handleTodoSubmit)
 
   const defaultShortTodos = document.querySelectorAll('.shortTodo')
   Array.from(defaultShortTodos).forEach((todo) =>
