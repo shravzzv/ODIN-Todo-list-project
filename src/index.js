@@ -190,8 +190,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const newDesc = e.target.elements.description.value
     const newDate = e.target.elements.date.value
     const newPriority = e.target.elements.priority.value
+    const newList = e.target.elements.list.value
 
-    const newTodo = new Todo(newTitle, newDesc, new Date(newDate), newPriority)
+    const newTodo = new Todo(
+      newTitle,
+      newDesc,
+      new Date(newDate),
+      newPriority,
+      newList
+    )
     todos.push(newTodo)
 
     // add a new .shortTodo inside .todosContainer
