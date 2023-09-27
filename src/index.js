@@ -275,8 +275,10 @@ document.addEventListener('DOMContentLoaded', () => {
           e.currentTarget.textContent.toLowerCase()
       )
       .forEach((list) => {
-        // .shortTodo .contens .subContainer .list
-        list.parentNode.parentNode.parentNode.style.display = 'none'
+        // Ensure you're not modifying the body element
+        if (list.parentNode.parentNode.parentNode !== document.body) {
+          list.parentNode.parentNode.parentNode.style.display = 'none'
+        }
       })
   }
 
