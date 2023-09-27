@@ -9,6 +9,7 @@ import Todos from './components/todos'
 import NewListModal from './components/newListModal'
 import NewTodoModal from './components/newTodoModal'
 import ShortTodo from './components/shortTodo'
+import ExpandedTodo from './components/expandedTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
@@ -183,4 +184,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newTodoForm = document.querySelector('.newTodoForm')
   newTodoForm.addEventListener('submit', handleTodoSubmit)
+
+  // Understand the problem:
+  // There are a list of dom nodes with the classname .shortTodo which when clicked should append to the document an element ExpandedTodo(todo) which takes a shortTodo's associated Todo object as the argument only if there isn't an ExpandedTodo already present.
+  // The ExpandedTodo can then either close the expandedTodo or delete the shortTodo.
+
+  // Plan:
+  // attach an eventListener to all the default shortTodos.
+  // on clicking them, create a handler handleOpenTodo which should
+  // create a new ExpandedTodo(todo) element and append it to the document
+  // the argument (todo) can be found by todos[index], where index is the index of shortTodo in the DOM list.
+
+  // problems:
+  // ! newly created todos may not have this event listener attached
+
+  const handleOpenTodo = (e) => {
+    const index = Array.from(defaultShortTodos).indexOf(e.currentTarget)
+    console.log(index)
+
+    // create and append new expanded todo
+    const newExpTodo = ExpandedTodo(todos[index])
+    newExpTodo.classList.add('show')
+    content.appendChild(newExpTodo)
+  }
+
+  const defaultShortTodos = document.querySelectorAll('.shortTodo')
+  Array.from(defaultShortTodos).forEach((todo) =>
+    todo.addEventListener('click', handleOpenTodo)
+  )
 })

@@ -312,12 +312,12 @@ button:hover {
   color: var(--txt-clr-prm);
 }
 
-/* largeTodo */
-.largeTodo {
+/* expanded Todo */
+.expTodo {
   display: none;
 }
 
-.largeTodo.show {
+.expTodo.show {
   display: block;
   padding: 1em;
   border-radius: 1em;
@@ -332,7 +332,7 @@ button:hover {
   transform: translate(-50%);
 }
 
-.largeTodo > header {
+.expTodo > header {
   border-bottom: 1px solid var(--txt-clr-prm);
   display: flex;
   align-items: center;
@@ -340,29 +340,29 @@ button:hover {
   padding-bottom: 1em;
 }
 
-.largeTodo > header > button {
+.expTodo > header > button {
   border-color: transparent;
 }
 
-.largeTodo > header > button:first-of-type {
+.expTodo > header > button:first-of-type {
   margin-right: auto;
 }
 
-.largeTodo > main {
+.expTodo > main {
   display: flex;
   align-items: baseline;
   gap: 1em;
 }
 
-.largeTodo .title {
+.expTodo .title {
   margin-bottom: 0;
 }
 
-.largeTodo .desc {
+.expTodo .desc {
   opacity: 0.9;
 }
 
-.largeTodo .section {
+.expTodo .section {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -370,7 +370,7 @@ button:hover {
   margin: 1em;
 }
 
-.largeTodo .section button {
+.expTodo .section button {
   border: none;
 }
 
@@ -415,7 +415,7 @@ button:hover {
     transform: scale(1.015);
   }
 
-  .largeTodo.show {
+  .expTodo.show {
     width: max-content;
   }
 
