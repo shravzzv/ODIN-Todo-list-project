@@ -27,7 +27,6 @@ const NewTodoModal = () => {
   dateInput.required = true
 
   const priorityInput = document.createElement('select')
-  priorityInput.name = 'Priority'
   priorityInput.name = 'priority'
   priorityInput.className = 'priority'
 
@@ -41,8 +40,20 @@ const NewTodoModal = () => {
     const option = document.createElement('option')
     option.value = priority.value
     option.text = priority.label
-    option.selected = priority.selected
     priorityInput.appendChild(option)
+  })
+
+  const listInput = document.createElement('select')
+  listInput.name = 'list'
+  listInput.className = 'list'
+
+  const tabs = ['Inbox', 'Personal', 'Work']
+
+  tabs.forEach((tab) => {
+    const option = document.createElement('option')
+    option.value = tab
+    option.text = tab
+    listInput.appendChild(option)
   })
 
   const buttonsContainer = document.createElement('div')
@@ -61,6 +72,7 @@ const NewTodoModal = () => {
   element.appendChild(descInput)
   element.appendChild(widgetsContainer)
   element.appendChild(buttonsContainer)
+  element.appendChild(listInput)
 
   widgetsContainer.appendChild(dateInput)
   widgetsContainer.appendChild(priorityInput)

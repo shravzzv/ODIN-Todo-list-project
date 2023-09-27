@@ -310,3 +310,15 @@ document.addEventListener('DOMContentLoaded', () => {
     tab.addEventListener('click', handleTabClick)
   )
 })
+
+// todo: Choose list while creating todo
+// ?Understand the problem:
+// When a new Todo is created by pressing the addTodoBtn, I want to be able to select which list that todo should belong to.
+// Currently, when I add a todo, no list is being selected.
+
+// ?Plan:
+// In the newTodoModal, create a select input with the available lists as options.
+// In the handleTodoSubmit handler, get that input and use it while creating new todos.
+//
+
+// ! Problem: newTodoForm is appened to the DOM unnecessarily
