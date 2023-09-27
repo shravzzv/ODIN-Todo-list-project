@@ -236,6 +236,25 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteBtn.addEventListener('click', handleDeleteTodo)
   }
 
+  const handleTabClick = (e) => {
+    // reset by displaying all todos
+    Array.from(document.querySelectorAll('.shortTodo')).forEach(
+      (todo) => (todo.style.display = 'flex')
+    )
+
+    // hide all todos whose list is not the clicked tab
+    Array.from(document.querySelectorAll('.list'))
+      .filter(
+        (list) =>
+          list.textContent.toLowerCase() !==
+          e.currentTarget.textContent.toLowerCase()
+      )
+      .forEach((list) => {
+        // .shortTodo .contens .subContainer .list
+        list.parentNode.parentNode.parentNode.style.display = 'none'
+      })
+  }
+
   // event listeners
 
   const addListBtn = document.querySelector('.addListBtn')
@@ -260,35 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
   Array.from(defaultShortTodos).forEach((todo) =>
     todo.addEventListener('click', handleOpenTodo)
   )
-
-  // todo: tabs functionality
-  // ?Understand the problem:
-  // In the document, I have buttons with the class tab which on clicking should filter the shortTodos to display only those whose list has value of the button's textContent and hide the remanining.
-
-  // ?Plan:
-  // Gather all the default tabs
-  // Add an event listener to these tabs with handleTabClick
-  // Inside the handler, get all shortTodo's whose list !== tab.textContent and hide them
-
-  // todo: tabs functionality for newly created tabs
-
-  const handleTabClick = (e) => {
-    Array.from(document.querySelectorAll('.shortTodo')).forEach(
-      (todo) => (todo.style.display = 'flex')
-    )
-
-    // hide all todos whose list is not the clicked tab
-    Array.from(document.querySelectorAll('.list'))
-      .filter(
-        (list) =>
-          list.textContent.toLowerCase() !==
-          e.currentTarget.textContent.toLowerCase()
-      )
-      .forEach((list) => {
-        // .shortTodo .contens .subContainer .list
-        list.parentNode.parentNode.parentNode.style.display = 'none'
-      })
-  }
 
   const defaultTabs = document.querySelectorAll('.tab')
   Array.from(defaultTabs).forEach((tab) =>
