@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'Hello, World!',
       new Date('2023-09-30'),
       '⭐⭐',
-      'inbox'
+      'home'
     ),
     new Todo(
       'Read chapter 5 of Sapiens',
@@ -126,11 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
     lists.push(newList)
 
     // add new .tab button inside .tabsContainer
-    const newTab = document.createElement('button')
-    newTab.className = 'tab'
-    newTab.textContent = newList.title
+    const newTabEl = document.createElement('button')
+    newTabEl.className = 'tab'
+    newTabEl.textContent = newList.title
+    newTabEl.addEventListener('click', handleTabClick)
+
     const tabsContainer = document.querySelector('.tabsContainer')
-    tabsContainer.appendChild(newTab)
+    tabsContainer.appendChild(newTabEl)
 
     // reset the form
     e.target.reset()
@@ -268,6 +270,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add an event listener to these tabs with handleTabClick
   // Inside the handler, get all shortTodo's whose list !== tab.textContent and hide them
 
+  // todo: tabs functionality for newly created tabs
+
   const handleTabClick = (e) => {
     Array.from(document.querySelectorAll('.shortTodo')).forEach(
       (todo) => (todo.style.display = 'flex')
@@ -275,7 +279,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // hide all todos whose list is not the clicked tab
     Array.from(document.querySelectorAll('.list'))
-      .filter((list) => list.textContent !== e.currentTarget.textContent)
+      .filter(
+        (list) =>
+          list.textContent.toLowerCase() !==
+          e.currentTarget.textContent.toLowerCase()
+      )
       .forEach((list) => {
         // .shortTodo .contens .subContainer .list
         list.parentNode.parentNode.parentNode.style.display = 'none'
