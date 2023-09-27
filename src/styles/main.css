@@ -412,7 +412,7 @@ button:hover {
   }
 
   .shortTodo:hover {
-    transform: scale(1.015);
+    box-shadow: red 0px 0px 12px;
   }
 
   .expTodo.show {
