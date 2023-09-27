@@ -8,7 +8,7 @@ const NewTodoModal = () => {
   titleInput.autofocus = true
   titleInput.required = true
   titleInput.minLength = '3'
-  titleInput.maxLength = '25'
+  titleInput.maxLength = '50'
 
   const descInput = document.createElement('textarea')
   descInput.placeholder = 'Description'
