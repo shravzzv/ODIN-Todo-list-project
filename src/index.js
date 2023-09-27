@@ -212,8 +212,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // On expanding a todo, remove the click eventListener from all shortTodos
   // On closing an expanded todo, re attach the eventListeners
 
+  // todo: hide tabscontainer and addTodoBtn on expanding a todo
+  // ?understand the problem:
+  // There exist a button '.tabsContainer .addListBtn' and a button with .addTodo which when clicked open forms to create new lists and todos respectively. When a todo is expanded, these buttons are to be hidden and re exposed when the todo is closed.
+
+  // ?Plan:
+  // In the handleOpenTodo handler, select and hide the two buttons
+  // On closing, expose these elements
+
   // problems:
-  // ! can expand multiple todos at the same time
+  // // ! can expand multiple todos at the same time
   // ! newly created todos may not have this event listener attached
 
   const handleOpenTodo = (e) => {
@@ -229,6 +237,10 @@ document.addEventListener('DOMContentLoaded', () => {
       .querySelectorAll('.shortTodo')
       .forEach((todo) => todo.removeEventListener('click', handleOpenTodo))
 
+    // hide addListBtn and addTodoBtn
+    document.querySelector('.addListBtn').style.display = 'none'
+    document.querySelector('.addTodo').style.display = 'none'
+
     // add cancel button functionality
     const handleCloseTodo = (e) => {
       // .expTodo .header .close
@@ -238,6 +250,10 @@ document.addEventListener('DOMContentLoaded', () => {
       document
         .querySelectorAll('.shortTodo')
         .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
+
+      // expose addListBtn and addTodoBtn
+      document.querySelector('.addListBtn').style.display = 'block'
+      document.querySelector('.addTodo').style.display = 'block'
     }
     const cancel = document.querySelector('.expTodo .close')
     cancel.addEventListener('click', handleCloseTodo)
