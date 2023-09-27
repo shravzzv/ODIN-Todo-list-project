@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const newTodoForm = document.querySelector('.newTodoForm')
   newTodoForm.addEventListener('submit', handleTodoSubmit)
 
-  // Understand the problem:
+  // ? Understand the problem:
   // There are a list of dom nodes with the classname .shortTodo which when clicked should append to the document an element ExpandedTodo(todo) which takes a shortTodo's associated Todo object as the argument only if there isn't an ExpandedTodo already present.
   // The ExpandedTodo can then either close the expandedTodo or delete the shortTodo.
 
@@ -195,17 +195,34 @@ document.addEventListener('DOMContentLoaded', () => {
   // create a new ExpandedTodo(todo) element and append it to the document
   // the argument (todo) can be found by todos[index], where index is the index of shortTodo in the DOM list.
 
+  // todo: closing the expanded todo:
+  // ?understand the problem:
+  // There is an element ExpandedTodo on the document containing a button with the classname close. When this button is clicked, remove the ExpandedTodo node from the document.
+
+  // ?Plan:
+  // select the cancel button on the expanded todo inside the handleOpenTodo eventhandler
+  // attach an event listener to the button
+  // the handleCloseTodo should select the .expTodo and remove it from the DOM
+
   // problems:
+  // ! can expand multiple todos at the same time
   // ! newly created todos may not have this event listener attached
 
   const handleOpenTodo = (e) => {
     const index = Array.from(defaultShortTodos).indexOf(e.currentTarget)
-    console.log(index)
 
     // create and append new expanded todo
     const newExpTodo = ExpandedTodo(todos[index])
     newExpTodo.classList.add('show')
     content.appendChild(newExpTodo)
+
+    // add cancel button functionality
+    const handleCloseTodo = (e) => {
+      e.target.parentNode.parentNode.remove()
+      // .expTodo .header .close
+    }
+    const cancel = document.querySelector('.expTodo .close')
+    cancel.addEventListener('click', handleCloseTodo)
   }
 
   const defaultShortTodos = document.querySelectorAll('.shortTodo')
