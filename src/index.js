@@ -9,6 +9,7 @@ import Todos from './components/todos'
 import NewListModal from './components/newListModal'
 import NewTodoModal from './components/newTodoModal'
 import ShortTodo from './components/shortTodo'
+import ExpandedTodo from './components/expandedTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
@@ -159,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // add a new .shortTodo inside .todosContainer
     const newTodoEl = ShortTodo(newTodo)
     document.querySelector('.todosContainer').appendChild(newTodoEl)
+    newTodoEl.addEventListener('click', handleOpenTodo)
 
     // reset the form
     e.target.reset()
@@ -183,4 +185,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newTodoForm = document.querySelector('.newTodoForm')
   newTodoForm.addEventListener('submit', handleTodoSubmit)
+
+  // ? Understand the problem:
+  // There are a list of dom nodes with the classname .shortTodo which when clicked should append to the document an element ExpandedTodo(todo) which takes a shortTodo's associated Todo object as the argument only if there isn't an ExpandedTodo already present.
+  // The ExpandedTodo can then either close the expandedTodo or delete the shortTodo.
+
+  // Plan:
+  // attach an eventListener to all the default shortTodos.
+  // on clicking them, create a handler handleOpenTodo which should
+  // create a new ExpandedTodo(todo) element and append it to the document
+  // the argument (todo) can be found by todos[index], where index is the index of shortTodo in the DOM list.
+
+  // todo: closing the expanded todo:
+  // ?understand the problem:
+  // There is an element ExpandedTodo on the document containing a button with the classname close. When this button is clicked, remove the ExpandedTodo node from the document.
+
+  // ?Plan:
+  // select the cancel button on the expanded todo inside the handleOpenTodo eventhandler
+  // attach an event listener to the button
+  // the handleCloseTodo should select the .expTodo and remove it from the DOM
+
+  // todo: prevent clicking on multiple shortTodos
+  // ?understand the problem:
+  // There exist elements with class .shortTodo which when clicked append to the document an expanded todo. But when an expanded todo is already present in the dom, these elements should not be allowed to be clicked.
+
+  // ?Plan:
+  // On expanding a todo, remove the click eventListener from all shortTodos
+  // On closing an expanded todo, re attach the eventListeners
+
+  // todo: hide tabscontainer and addTodoBtn on expanding a todo
+  // ?understand the problem:
+  // There exist a button '.tabsContainer .addListBtn' and a button with .addTodo which when clicked open forms to create new lists and todos respectively. When a todo is expanded, these buttons are to be hidden and re exposed when the todo is closed.
+
+  // ?Plan:
+  // In the handleOpenTodo handler, select and hide the two buttons
+  // On closing, expose these elements
+
+  // todo: make newly created todos expand
+  // ?Understand the problem:
+  // When a new todo is created, a new shortTodo element is added to the DOM. But this new todo doesn't have the handleOpenTodo eventListener attached to it, so it cannot be expanded.
+
+  // ?Plan:
+  // After creating a new todo, attach handleOpenTodo eventListener to it.
+  // Inside handleOpenTodo, dynamically select elements rather than using variables.
+
+  // problems:
+  // // ! can expand multiple todos at the same time
+  // // ! newly created todos may not have this event listener attached
+
+  const handleOpenTodo = (e) => {
+    const index = Array.from(document.querySelectorAll('.shortTodo')).indexOf(
+      e.currentTarget
+    )
+
+    // create and append new expanded todo
+    const newExpTodo = ExpandedTodo(todos[index])
+    newExpTodo.classList.add('show')
+    content.appendChild(newExpTodo)
+
+    // remove eventlisteners from shortTodos to prevent further clicks
+    document
+      .querySelectorAll('.shortTodo')
+      .forEach((todo) => todo.removeEventListener('click', handleOpenTodo))
+
+    // hide addListBtn and addTodoBtn
+    document.querySelector('.addListBtn').style.display = 'none'
+    document.querySelector('.addTodo').style.display = 'none'
+
+    // add cancel button functionality
+    const handleCloseTodo = (e) => {
+      // .expTodo .header .close
+      e.target.parentNode.parentNode.remove()
+
+      // reattach eventlisteners on shortTodos
+      document
+        .querySelectorAll('.shortTodo')
+        .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
+
+      // expose addListBtn and addTodoBtn
+      document.querySelector('.addListBtn').style.display = 'block'
+      document.querySelector('.addTodo').style.display = 'block'
+    }
+    const cancel = document.querySelector('.expTodo .close')
+    cancel.addEventListener('click', handleCloseTodo)
+  }
+
+  const defaultShortTodos = document.querySelectorAll('.shortTodo')
+  Array.from(defaultShortTodos).forEach((todo) =>
+    todo.addEventListener('click', handleOpenTodo)
+  )
 })

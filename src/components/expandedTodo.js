@@ -1,14 +1,14 @@
-const LargeTodo = ({ title, desc, due, priority, list }) => {
+const ExpandedTodo = ({ title, desc, due, priority, list }) => {
   const element = document.createElement('div')
-  element.className = 'largeTodo'
+  element.className = 'expTodo'
 
   const header = document.createElement('header')
 
   const listEl = document.createElement('button')
   listEl.textContent = list
 
-  const editBtn = document.createElement('button')
-  editBtn.textContent = '📝'
+  // const editBtn = document.createElement('button')
+  // editBtn.textContent = '📝'
 
   const delBtn = document.createElement('button')
   delBtn.textContent = '🗑️'
@@ -50,7 +50,7 @@ const LargeTodo = ({ title, desc, due, priority, list }) => {
   element.appendChild(section)
 
   header.appendChild(listEl)
-  header.appendChild(editBtn)
+  // header.appendChild(editBtn)
   header.appendChild(delBtn)
   header.appendChild(closeBtn)
 
@@ -66,4 +66,4 @@ const LargeTodo = ({ title, desc, due, priority, list }) => {
   return element
 }
 
-export default LargeTodo
+export default ExpandedTodo
