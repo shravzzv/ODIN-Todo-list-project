@@ -160,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // add a new .shortTodo inside .todosContainer
     const newTodoEl = ShortTodo(newTodo)
     document.querySelector('.todosContainer').appendChild(newTodoEl)
+    newTodoEl.addEventListener('click', handleOpenTodo)
 
     // reset the form
     e.target.reset()
@@ -220,12 +221,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // In the handleOpenTodo handler, select and hide the two buttons
   // On closing, expose these elements
 
+  // todo: make newly created todos expand
+  // ?Understand the problem:
+  // When a new todo is created, a new shortTodo element is added to the DOM. But this new todo doesn't have the handleOpenTodo eventListener attached to it, so it cannot be expanded.
+
+  // ?Plan:
+  // After creating a new todo, attach handleOpenTodo eventListener to it.
+  // Inside handleOpenTodo, dynamically select elements rather than using variables.
+
   // problems:
   // // ! can expand multiple todos at the same time
-  // ! newly created todos may not have this event listener attached
+  // // ! newly created todos may not have this event listener attached
 
   const handleOpenTodo = (e) => {
-    const index = Array.from(defaultShortTodos).indexOf(e.currentTarget)
+    const index = Array.from(document.querySelectorAll('.shortTodo')).indexOf(
+      e.currentTarget
+    )
 
     // create and append new expanded todo
     const newExpTodo = ExpandedTodo(todos[index])
