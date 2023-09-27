@@ -19,61 +19,71 @@ document.addEventListener('DOMContentLoaded', () => {
       'Complete project proposal',
       'Hello, World!',
       new Date('2023-09-30'),
-      '⭐⭐'
+      '⭐⭐',
+      'inbox'
     ),
     new Todo(
       'Read chapter 5 of Sapiens',
       'Continue reading the fascinating book "Sapiens" by Yuval Noah Harari.',
       new Date('2023-09-25'),
-      '⭐'
+      '⭐',
+      'work'
     ),
     new Todo(
       'Go for a jog',
       'Get some exercise by going for a jog in the morning.',
       new Date('2023-09-24'),
-      '⭐'
+      '⭐',
+      'personal'
     ),
     new Todo(
       'Learn about JavaScript promises',
       'Dive deeper into JavaScript promises and asynchronous programming.',
       new Date('2023-09-26'),
-      '⭐⭐⭐'
+      '⭐⭐⭐',
+      'work'
     ),
     new Todo(
       'Write a blog post',
       'Start writing a blog post about web development tips and tricks.',
       new Date('2023-09-28'),
-      '⭐⭐'
+      '⭐⭐',
+      'inbox'
     ),
     new Todo(
       'Practice meditation',
       'Set aside some time for meditation to relax and clear your mind.',
       new Date('2023-09-27'),
-      '⭐'
+      '⭐',
+      'work'
     ),
     new Todo(
       'Attend a networking event',
       'Participate in a local networking event to meet potential collaborators.',
       new Date('2023-09-29'),
-      '⭐⭐'
+      '⭐⭐',
+      'personal'
     ),
     new Todo(
       'Study biology',
       'Continue your study of biology and explore fascinating topics.',
       new Date('2023-09-23'),
-      '⭐'
+      '⭐',
+      'personal'
     ),
     new Todo(
       'Work on a web development project',
       'Spend time working on your web development project with JavaScript.',
       new Date('2023-09-30'),
-      '⭐⭐⭐'
+      '⭐⭐⭐',
+      'inbox'
     ),
     new Todo(
       'Connect with like-minded individuals',
       'Take steps to find and connect with people who share your interests.',
       new Date('2023-09-28'),
-      '⭐⭐'
+      '⭐⭐',
+      'inbox'
     ),
   ]
 
@@ -247,5 +257,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultShortTodos = document.querySelectorAll('.shortTodo')
   Array.from(defaultShortTodos).forEach((todo) =>
     todo.addEventListener('click', handleOpenTodo)
+  )
+
+  // todo: tabs functionality
+  // ?Understand the problem:
+  // In the document, I have buttons with the class tab which on clicking should filter the shortTodos to display only those whose list has value of the button's textContent and hide the remanining.
+
+  // ?Plan:
+  // Gather all the default tabs
+  // Add an event listener to these tabs with handleTabClick
+  // Inside the handler, get all shortTodo's whose list !== tab.textContent and hide them
+
+  const handleTabClick = (e) => {
+    Array.from(document.querySelectorAll('.shortTodo')).forEach(
+      (todo) => (todo.style.display = 'flex')
+    )
+
+    // hide all todos whose list is not the clicked tab
+    Array.from(document.querySelectorAll('.list'))
+      .filter((list) => list.textContent !== e.currentTarget.textContent)
+      .forEach((list) => {
+        // .shortTodo .contens .subContainer .list
+        list.parentNode.parentNode.parentNode.style.display = 'none'
+      })
+  }
+
+  const defaultTabs = document.querySelectorAll('.tab')
+  Array.from(defaultTabs).forEach((tab) =>
+    tab.addEventListener('click', handleTabClick)
   )
 })
