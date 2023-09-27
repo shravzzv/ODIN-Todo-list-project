@@ -19,61 +19,71 @@ document.addEventListener('DOMContentLoaded', () => {
       'Complete project proposal',
       'Hello, World!',
       new Date('2023-09-30'),
-      '⭐⭐'
+      '⭐⭐',
+      'home'
     ),
     new Todo(
       'Read chapter 5 of Sapiens',
       'Continue reading the fascinating book "Sapiens" by Yuval Noah Harari.',
       new Date('2023-09-25'),
-      '⭐'
+      '⭐',
+      'work'
     ),
     new Todo(
       'Go for a jog',
       'Get some exercise by going for a jog in the morning.',
       new Date('2023-09-24'),
-      '⭐'
+      '⭐',
+      'personal'
     ),
     new Todo(
       'Learn about JavaScript promises',
       'Dive deeper into JavaScript promises and asynchronous programming.',
       new Date('2023-09-26'),
-      '⭐⭐⭐'
+      '⭐⭐⭐',
+      'work'
     ),
     new Todo(
       'Write a blog post',
       'Start writing a blog post about web development tips and tricks.',
       new Date('2023-09-28'),
-      '⭐⭐'
+      '⭐⭐',
+      'inbox'
     ),
     new Todo(
       'Practice meditation',
       'Set aside some time for meditation to relax and clear your mind.',
       new Date('2023-09-27'),
-      '⭐'
+      '⭐',
+      'work'
     ),
     new Todo(
       'Attend a networking event',
       'Participate in a local networking event to meet potential collaborators.',
       new Date('2023-09-29'),
-      '⭐⭐'
+      '⭐⭐',
+      'personal'
     ),
     new Todo(
       'Study biology',
       'Continue your study of biology and explore fascinating topics.',
       new Date('2023-09-23'),
-      '⭐'
+      '⭐',
+      'personal'
     ),
     new Todo(
       'Work on a web development project',
       'Spend time working on your web development project with JavaScript.',
       new Date('2023-09-30'),
-      '⭐⭐⭐'
+      '⭐⭐⭐',
+      'inbox'
     ),
     new Todo(
       'Connect with like-minded individuals',
       'Take steps to find and connect with people who share your interests.',
       new Date('2023-09-28'),
-      '⭐⭐'
+      '⭐⭐',
+      'inbox'
     ),
   ]
 
@@ -116,11 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
     lists.push(newList)
 
     // add new .tab button inside .tabsContainer
-    const newTab = document.createElement('button')
-    newTab.className = 'tab'
-    newTab.textContent = newList.title
+    const newTabEl = document.createElement('button')
+    newTabEl.className = 'tab'
+    newTabEl.textContent = newList.title
+    newTabEl.addEventListener('click', handleTabClick)
+
     const tabsContainer = document.querySelector('.tabsContainer')
-    tabsContainer.appendChild(newTab)
+    tabsContainer.appendChild(newTabEl)
 
     // reset the form
     e.target.reset()
@@ -165,26 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // reset the form
     e.target.reset()
   }
-
-  // event listeners
-
-  const addListBtn = document.querySelector('.addListBtn')
-  addListBtn.addEventListener('click', handleOpenNewListForm)
-
-  const canceNewListBtn = document.querySelector('.newListForm .cancel')
-  canceNewListBtn.addEventListener('click', handleCloseNewListForm)
-
-  const newListForm = document.querySelector('.newListForm')
-  newListForm.addEventListener('submit', handleListSubmit)
-
-  const addTodoBtn = document.querySelector('.addTodo')
-  addTodoBtn.addEventListener('click', handleOpenNewTodoForm)
-
-  const cancelNewTodoBtn = document.querySelector('.newTodoForm .cancel')
-  cancelNewTodoBtn.addEventListener('click', handleCloseNewTodoForm)
-
-  const newTodoForm = document.querySelector('.newTodoForm')
-  newTodoForm.addEventListener('submit', handleTodoSubmit)
 
   const handleOpenTodo = (e) => {
     const index = Array.from(document.querySelectorAll('.shortTodo')).indexOf(
@@ -244,8 +236,52 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteBtn.addEventListener('click', handleDeleteTodo)
   }
 
+  const handleTabClick = (e) => {
+    // reset by displaying all todos
+    Array.from(document.querySelectorAll('.shortTodo')).forEach(
+      (todo) => (todo.style.display = 'flex')
+    )
+
+    // hide all todos whose list is not the clicked tab
+    Array.from(document.querySelectorAll('.list'))
+      .filter(
+        (list) =>
+          list.textContent.toLowerCase() !==
+          e.currentTarget.textContent.toLowerCase()
+      )
+      .forEach((list) => {
+        // .shortTodo .contens .subContainer .list
+        list.parentNode.parentNode.parentNode.style.display = 'none'
+      })
+  }
+
+  // event listeners
+
+  const addListBtn = document.querySelector('.addListBtn')
+  addListBtn.addEventListener('click', handleOpenNewListForm)
+
+  const canceNewListBtn = document.querySelector('.newListForm .cancel')
+  canceNewListBtn.addEventListener('click', handleCloseNewListForm)
+
+  const newListForm = document.querySelector('.newListForm')
+  newListForm.addEventListener('submit', handleListSubmit)
+
+  const addTodoBtn = document.querySelector('.addTodo')
+  addTodoBtn.addEventListener('click', handleOpenNewTodoForm)
+
+  const cancelNewTodoBtn = document.querySelector('.newTodoForm .cancel')
+  cancelNewTodoBtn.addEventListener('click', handleCloseNewTodoForm)
+
+  const newTodoForm = document.querySelector('.newTodoForm')
+  newTodoForm.addEventListener('submit', handleTodoSubmit)
+
   const defaultShortTodos = document.querySelectorAll('.shortTodo')
   Array.from(defaultShortTodos).forEach((todo) =>
     todo.addEventListener('click', handleOpenTodo)
+  )
+
+  const defaultTabs = document.querySelectorAll('.tab')
+  Array.from(defaultTabs).forEach((tab) =>
+    tab.addEventListener('click', handleTabClick)
   )
 })
