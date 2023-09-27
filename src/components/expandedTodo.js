@@ -7,8 +7,8 @@ const ExpandedTodo = ({ title, desc, due, priority, list }) => {
   const listEl = document.createElement('button')
   listEl.textContent = list
 
-  const editBtn = document.createElement('button')
-  editBtn.textContent = '📝'
+  // const editBtn = document.createElement('button')
+  // editBtn.textContent = '📝'
 
   const delBtn = document.createElement('button')
   delBtn.textContent = '🗑️'
@@ -50,7 +50,7 @@ const ExpandedTodo = ({ title, desc, due, priority, list }) => {
   element.appendChild(section)
 
   header.appendChild(listEl)
-  header.appendChild(editBtn)
+  // header.appendChild(editBtn)
   header.appendChild(delBtn)
   header.appendChild(closeBtn)
 
