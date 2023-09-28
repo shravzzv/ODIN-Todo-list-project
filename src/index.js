@@ -50,41 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
       '⭐⭐',
       'inbox'
     ),
-    new Todo(
-      'Practice meditation',
-      'Set aside some time for meditation to relax and clear your mind.',
-      new Date('2023-09-27'),
-      '⭐',
-      'work'
-    ),
-    new Todo(
-      'Attend a networking event',
-      'Participate in a local networking event to meet potential collaborators.',
-      new Date('2023-09-29'),
-      '⭐⭐',
-      'personal'
-    ),
-    new Todo(
-      'Study biology',
-      'Continue your study of biology and explore fascinating topics.',
-      new Date('2023-09-23'),
-      '⭐',
-      'personal'
-    ),
-    new Todo(
-      'Work on a web development project',
-      'Spend time working on your web development project with JavaScript.',
-      new Date('2023-09-30'),
-      '⭐⭐⭐',
-      'inbox'
-    ),
-    new Todo(
-      'Connect with like-minded individuals',
-      'Take steps to find and connect with people who share your interests.',
-      new Date('2023-09-28'),
-      '⭐⭐',
-      'inbox'
-    ),
   ]
 
   content.appendChild(Logo())
@@ -307,7 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // create and append new expanded todo
     const newExpTodo = ExpandedTodo(todos[index])
-    newExpTodo.classList.add('show')
     content.appendChild(newExpTodo)
 
     // remove eventlisteners from shortTodos to prevent further clicks

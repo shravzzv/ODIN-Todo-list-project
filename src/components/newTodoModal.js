@@ -69,11 +69,11 @@ const NewTodoModal = (lists) => {
   element.appendChild(titleInput)
   element.appendChild(descInput)
   element.appendChild(widgetsContainer)
-  element.appendChild(buttonsContainer)
   element.appendChild(listInput)
+  element.appendChild(dateInput)
+  element.appendChild(priorityInput)
+  element.appendChild(buttonsContainer)
 
-  widgetsContainer.appendChild(dateInput)
-  widgetsContainer.appendChild(priorityInput)
   buttonsContainer.appendChild(submitBtn)
   buttonsContainer.appendChild(cancelBtn)
 

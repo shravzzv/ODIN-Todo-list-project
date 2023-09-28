@@ -307,10 +307,6 @@ button:hover {
 
 /* expanded Todo */
 .expTodo {
-  display: none;
-}
-
-.expTodo.show {
   display: block;
   padding: 1em;
   border-radius: 1em;
@@ -408,11 +404,7 @@ button:hover {
     box-shadow: red 0px 0px 12px;
   }
 
-  .expTodo.show {
+  .expTodo {
     width: max-content;
-  }
-
-  .widgetsContainer .date::before {
-    content: '';
   }
 }
