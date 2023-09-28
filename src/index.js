@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // event handlers
 
-  // lists
+  // for list form
   const handleOpenNewListForm = (e) => {
     // append newListModel to the DOM
     content.appendChild(NewListModal())
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.newListForm').remove()
   }
 
-  // todos
+  // for todos form
   const handleOpenNewTodoForm = (e) => {
     // append newTodoModel to the DOM
     content.appendChild(NewTodoModal(lists))
@@ -299,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.newTodoForm').remove()
   }
 
+  // for a todo
   const handleOpenTodo = (e) => {
     const index = Array.from(document.querySelectorAll('.shortTodo')).indexOf(
       e.currentTarget
@@ -314,49 +315,67 @@ document.addEventListener('DOMContentLoaded', () => {
       .querySelectorAll('.shortTodo')
       .forEach((todo) => todo.removeEventListener('click', handleOpenTodo))
 
+    // remove eventlisteners from tabs to prevent further clicks
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.removeEventListener('click', handleTabClick))
+
     // hide addListBtn and addTodoBtn
     document.querySelector('.addListBtn').style.display = 'none'
     document.querySelector('.addTodo').style.display = 'none'
 
     // add cancel button functionality
-    const handleCloseTodo = (e) => {
-      // .expTodo .header .close
-      e.target.parentNode.parentNode.remove()
-
-      // reattach eventlisteners on shortTodos
-      document
-        .querySelectorAll('.shortTodo')
-        .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
-
-      // expose addListBtn and addTodoBtn
-      document.querySelector('.addListBtn').style.display = 'block'
-      document.querySelector('.addTodo').style.display = 'block'
-    }
     const cancelBtn = document.querySelector('.expTodo .close')
     cancelBtn.addEventListener('click', handleCloseTodo)
 
     // add delete button functionality
-    const handleDeleteTodo = (e) => {
-      // remove the expandedTodo
-      e.target.parentNode.parentNode.remove()
-
-      // remove associated shortTodo and todo
-      Array.from(document.querySelectorAll('.shortTodo'))[index].remove()
-      todos.splice(index, 1)
-
-      // reattach eventlisteners on shortTodos
-      document
-        .querySelectorAll('.shortTodo')
-        .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
-
-      // expose addListBtn and addTodoBtn
-      document.querySelector('.addListBtn').style.display = 'block'
-      document.querySelector('.addTodo').style.display = 'block'
-    }
     const deleteBtn = document.querySelector('.expTodo .delete')
-    deleteBtn.addEventListener('click', handleDeleteTodo)
+    deleteBtn.addEventListener('click', (e) => handleDeleteTodo(e, index))
   }
 
+  const handleCloseTodo = (e) => {
+    // .expTodo .header .close
+    e.target.parentNode.parentNode.remove()
+
+    // reattach eventlisteners on shortTodos
+    document
+      .querySelectorAll('.shortTodo')
+      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
+
+    // reattach eventlisteners on tabs
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.addEventListener('click', handleTabClick))
+
+    // expose addListBtn and addTodoBtn
+    document.querySelector('.addListBtn').style.display = 'block'
+    document.querySelector('.addTodo').style.display = 'block'
+  }
+
+  const handleDeleteTodo = (e, index) => {
+    // remove the expandedTodo
+    e.target.parentNode.parentNode.remove()
+
+    // remove associated shortTodo and todo
+    Array.from(document.querySelectorAll('.shortTodo'))[index].remove()
+    todos.splice(index, 1)
+
+    // reattach eventlisteners on shortTodos
+    document
+      .querySelectorAll('.shortTodo')
+      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
+
+    // reattach eventlisteners on tabs
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.addEventListener('click', handleTabClick))
+
+    // expose addListBtn and addTodoBtn
+    document.querySelector('.addListBtn').style.display = 'block'
+    document.querySelector('.addTodo').style.display = 'block'
+  }
+
+  // for a tab
   const handleTabClick = (e) => {
     // reset by displaying all todos
     Array.from(document.querySelectorAll('.shortTodo')).forEach(
