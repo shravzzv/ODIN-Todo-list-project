@@ -136,8 +136,8 @@ button:hover {
 }
 
 .tabsContainer > button:hover {
-  background-color: var(--txt-clr-prm);
-  color: var(--bg-clr-prm);
+  box-shadow: red 0px 0px 10px 0px;
+  transform: translateY(0);
 }
 
 .addListBtn {
