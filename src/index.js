@@ -279,18 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.todosContainer').appendChild(newTodoEl)
     newTodoEl.addEventListener('click', handleOpenTodo)
 
-    // navigate to the newList tab
-    Array.from(document.querySelectorAll('.list'))
-      .filter(
-        (list) => list.textContent.toLowerCase() !== newList.toLowerCase()
-      )
-      .forEach((list) => {
-        // Ensure you're not modifying the body element
-        if (list.parentNode.parentNode.parentNode !== document.body) {
-          list.parentNode.parentNode.parentNode.style.display = 'none'
-        }
-      })
-
     // expose addLists button
     document.querySelector('.addListBtn').style.display = 'block'
 
