@@ -130,6 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document
       .querySelectorAll('.shortTodo')
       .forEach((todo) => todo.removeEventListener('click', handleOpenTodo))
+
+    // remove eventlisteners from tabs to prevent further clicks
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.removeEventListener('click', handleTabClick))
   }
 
   const handleCloseNewListForm = (e) => {
@@ -141,6 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // expose addTodo button
     document.querySelector('.addTodo').style.display = 'block'
+
+    // reattach eventlisteners on tabs
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.addEventListener('click', handleTabClick))
 
     // reattach eventlisteners on shortTodos
     document
@@ -169,6 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // expose addTodo button
     document.querySelector('.addTodo').style.display = 'block'
+
+    // reattach eventlisteners on tabs
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.addEventListener('click', handleTabClick))
 
     // reattach eventlisteners on shortTodos
     document
