@@ -20,7 +20,7 @@ const NewTodoModal = (lists) => {
   widgetsContainer.className = 'widgetsContainer'
 
   const dateInput = document.createElement('input')
-  dateInput.type = 'datetime-local'
+  dateInput.type = 'date'
   dateInput.name = 'date'
   dateInput.id = 'dateInput'
   dateInput.className = 'date'

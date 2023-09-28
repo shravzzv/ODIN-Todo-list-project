@@ -239,7 +239,7 @@ button:hover {
   box-shadow: #0000003d 0px 3px 8px;
 
   position: fixed;
-  top: 30%;
+  top: 2%;
   left: 50%;
   transform: translate(-50%); /* Centering trick */
 
@@ -260,22 +260,15 @@ button:hover {
   margin-bottom: 1em;
 }
 
-.widgetsContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  gap: 1em;
-}
-
-.widgetsContainer > * {
+input[type='date'],
+select {
   background-color: var(--bg-clr-prm);
-  box-shadow: #0000003d 0px 3px 8px;
+  box-shadow: var(--bg-clr-sec) 0px 3px 8px;
   cursor: pointer;
   margin-bottom: 1em;
 }
 
-.widgetsContainer .date::before {
+.newTodoForm .date::before {
   content: '📆';
 }
 
@@ -285,6 +278,7 @@ button:hover {
   justify-content: flex-start;
   gap: 1em;
   width: 100%;
+  margin-top: 1em;
 }
 
 /* common to newListForm and newTodoForm */
@@ -406,5 +400,10 @@ button:hover {
 
   .expTodo {
     width: max-content;
+  }
+
+  .newTodoForm {
+    top: 50%;
+    transform: translate(-50%, -50%); /* Centering trick */
   }
 }
