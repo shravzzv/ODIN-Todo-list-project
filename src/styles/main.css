@@ -237,14 +237,11 @@ button:hover {
   background-color: var(--bg-clr-sec);
   border-radius: var(--bdr-radius-prm);
   box-shadow: #0000003d 0px 3px 8px;
-  display: none;
-}
 
-.newTodoForm.show {
   position: fixed;
   top: 30%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centering trick */
+  transform: translate(-50%); /* Centering trick */
 
   display: flex;
   flex-direction: column;

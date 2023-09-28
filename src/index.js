@@ -196,7 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // todos
   const handleOpenNewTodoForm = (e) => {
-    document.querySelector('.newTodoForm').classList.add('show')
+    // append newTodoModel to the DOM
+    content.appendChild(NewTodoModal(lists))
+
     // set autofocus on the title input
     setTimeout(() => {
       const input = document.querySelector('.newTodoForm>input:first-of-type')
@@ -204,18 +206,57 @@ document.addEventListener('DOMContentLoaded', () => {
         input.focus()
       }
     }, 0)
+
+    // hide addTodo button
+    document.querySelector('.addTodo').style.display = 'none'
+
+    // hide addList button
+    document.querySelector('.addListBtn').style.display = 'none'
+
+    // remove eventlisteners from shortTodos to prevent further clicks
+    document
+      .querySelectorAll('.shortTodo')
+      .forEach((todo) => todo.removeEventListener('click', handleOpenTodo))
+
+    // remove eventlisteners from tabs to prevent further clicks
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.removeEventListener('click', handleTabClick))
+
+    // add eventlistener to close the form
+    document
+      .querySelector('.newTodoForm .cancel')
+      .addEventListener('click', handleCloseNewTodoForm)
+
+    // add evenlisteners to submit the form
+    document
+      .querySelector('.newTodoForm')
+      .addEventListener('submit', handleTodoSubmit)
   }
 
   const handleCloseNewTodoForm = (e) => {
-    document.querySelector('.newTodoForm').classList.remove('show')
-    e.target.form.reset()
+    // remove the form from DOM
+    document.querySelector('.newTodoForm').remove()
+
+    // expose addList button
+    document.querySelector('.addListBtn').style.display = 'block'
+
+    // expose addTodo button
+    document.querySelector('.addTodo').style.display = 'block'
+
+    // reattach eventlisteners on tabs
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.addEventListener('click', handleTabClick))
+
+    // reattach eventlisteners on shortTodos
+    document
+      .querySelectorAll('.shortTodo')
+      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
   }
 
   const handleTodoSubmit = (e) => {
     e.preventDefault()
-
-    // hide the modal
-    document.querySelector('.newTodoForm').classList.remove('show')
 
     // create new todo using class Todo
     const newTitle = e.target.elements.title.value
@@ -233,13 +274,29 @@ document.addEventListener('DOMContentLoaded', () => {
     )
     todos.push(newTodo)
 
-    // add a new .shortTodo inside .todosContainer
+    // add a new shortTodo inside the todosContainer
     const newTodoEl = ShortTodo(newTodo)
     document.querySelector('.todosContainer').appendChild(newTodoEl)
     newTodoEl.addEventListener('click', handleOpenTodo)
 
-    // reset the form
-    e.target.reset()
+    // expose addLists button
+    document.querySelector('.addListBtn').style.display = 'block'
+
+    // expose addTodo button
+    document.querySelector('.addTodo').style.display = 'block'
+
+    // reattach eventlisteners on tabs
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.addEventListener('click', handleTabClick))
+
+    // reattach eventlisteners on shortTodos
+    document
+      .querySelectorAll('.shortTodo')
+      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
+
+    // remove the form from the DOM
+    document.querySelector('.newTodoForm').remove()
   }
 
   const handleOpenTodo = (e) => {
@@ -327,14 +384,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .querySelector('.addListBtn')
     .addEventListener('click', handleOpenNewListForm)
 
-  const addTodoBtn = document.querySelector('.addTodo')
-  addTodoBtn.addEventListener('click', handleOpenNewTodoForm)
-
-  const cancelNewTodoBtn = document.querySelector('.newTodoForm .cancel')
-  cancelNewTodoBtn.addEventListener('click', handleCloseNewTodoForm)
-
-  const newTodoForm = document.querySelector('.newTodoForm')
-  newTodoForm.addEventListener('submit', handleTodoSubmit)
+  document
+    .querySelector('.addTodo')
+    .addEventListener('click', handleOpenNewTodoForm)
 
   const defaultShortTodos = document.querySelectorAll('.shortTodo')
   Array.from(defaultShortTodos).forEach((todo) =>
@@ -356,16 +408,3 @@ document.addEventListener('DOMContentLoaded', () => {
 // In the newTodoModal, create a select input with the available lists as options.
 // In the handleTodoSubmit handler, get that input and use it while creating new todos.
 //
-
-// ! Problem: newTodoForm is appened to the DOM unnecessarily
-// ! Problem: newly created tabs aren't being shown in the todo modal
-
-// Plan:
-// when addTodoBtn is clicked, append the model to the document with the latest tabs as arguments
-// ! Problem: eventListeners associated with newTodoModal might not work
-
-// * Remove unnecssary models from the DOM
-// ? Understand
-// Currently, the newList and newTodo forms are appended to the DOM and a class .show is being changed using event handlers to show or hide them.
-// Instead of this, append the form only when the button is clicked and when it is canceled, remove the form from the DOM.
-// You need to remove the .show class and update the CSS.
