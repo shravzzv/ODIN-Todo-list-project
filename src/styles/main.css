@@ -131,6 +131,10 @@ button:hover {
   white-space: nowrap;
 }
 
+.tab.active {
+  box-shadow: red 0px 0px 10px 0px;
+}
+
 .tabsContainer > button:hover {
   background-color: var(--txt-clr-prm);
   color: var(--bg-clr-prm);

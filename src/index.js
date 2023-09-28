@@ -346,6 +346,12 @@ document.addEventListener('DOMContentLoaded', () => {
       (todo) => (todo.style.display = 'flex')
     )
 
+    Array.from(document.querySelectorAll('.tab')).forEach((tab) =>
+      tab.classList.remove('active')
+    )
+
+    e.currentTarget.classList.add('active')
+
     // hide all todos whose list is not the clicked tab
     Array.from(document.querySelectorAll('.list'))
       .filter(
