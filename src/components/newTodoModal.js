@@ -1,4 +1,4 @@
-const NewTodoModal = () => {
+const NewTodoModal = (lists) => {
   const element = document.createElement('form')
   element.className = 'newTodoForm'
 
@@ -20,14 +20,13 @@ const NewTodoModal = () => {
   widgetsContainer.className = 'widgetsContainer'
 
   const dateInput = document.createElement('input')
-  dateInput.type = 'datetime-local'
+  dateInput.type = 'date'
   dateInput.name = 'date'
   dateInput.id = 'dateInput'
   dateInput.className = 'date'
   dateInput.required = true
 
   const priorityInput = document.createElement('select')
-  priorityInput.name = 'Priority'
   priorityInput.name = 'priority'
   priorityInput.className = 'priority'
 
@@ -41,8 +40,18 @@ const NewTodoModal = () => {
     const option = document.createElement('option')
     option.value = priority.value
     option.text = priority.label
-    option.selected = priority.selected
     priorityInput.appendChild(option)
+  })
+
+  const listInput = document.createElement('select')
+  listInput.name = 'list'
+  listInput.className = 'list'
+
+  lists.forEach((tab) => {
+    const option = document.createElement('option')
+    option.value = tab.title
+    option.text = tab.title
+    listInput.appendChild(option)
   })
 
   const buttonsContainer = document.createElement('div')
@@ -60,10 +69,11 @@ const NewTodoModal = () => {
   element.appendChild(titleInput)
   element.appendChild(descInput)
   element.appendChild(widgetsContainer)
+  element.appendChild(listInput)
+  element.appendChild(dateInput)
+  element.appendChild(priorityInput)
   element.appendChild(buttonsContainer)
 
-  widgetsContainer.appendChild(dateInput)
-  widgetsContainer.appendChild(priorityInput)
   buttonsContainer.appendChild(submitBtn)
   buttonsContainer.appendChild(cancelBtn)
 

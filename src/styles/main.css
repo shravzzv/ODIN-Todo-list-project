@@ -131,6 +131,10 @@ button:hover {
   white-space: nowrap;
 }
 
+.tab.active {
+  box-shadow: red 0px 0px 10px 0px;
+}
+
 .tabsContainer > button:hover {
   background-color: var(--txt-clr-prm);
   color: var(--bg-clr-prm);
@@ -186,6 +190,10 @@ button:hover {
 
 .shortTodo > .contents {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .shortTodo .title {
@@ -215,19 +223,15 @@ button:hover {
 
 /* new List modal */
 .newListForm {
-  margin: auto;
   padding: 1em;
   background-color: var(--bg-clr-sec);
   border-radius: var(--bdr-radius-prm);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  display: none;
-}
 
-.newListForm.show {
   position: fixed;
-  top: 30%; /* Vertically center */
+  top: 30%;
   left: 50%; /* Horizontally center */
-  transform: translate(-50%, -50%); /* Centering trick */
+  transform: translate(-50%); /* horizontally Centering trick */
 
   display: flex;
   flex-wrap: wrap;
@@ -241,14 +245,11 @@ button:hover {
   background-color: var(--bg-clr-sec);
   border-radius: var(--bdr-radius-prm);
   box-shadow: #0000003d 0px 3px 8px;
-  display: none;
-}
 
-.newTodoForm.show {
   position: fixed;
-  top: 30%;
+  top: 2%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centering trick */
+  transform: translate(-50%); /* Centering trick */
 
   display: flex;
   flex-direction: column;
@@ -267,22 +268,15 @@ button:hover {
   margin-bottom: 1em;
 }
 
-.widgetsContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  gap: 1em;
-}
-
-.widgetsContainer > * {
+input[type='date'],
+select {
   background-color: var(--bg-clr-prm);
-  box-shadow: #0000003d 0px 3px 8px;
+  box-shadow: var(--bg-clr-sec) 0px 3px 8px;
   cursor: pointer;
   margin-bottom: 1em;
 }
 
-.widgetsContainer .date::before {
+.newTodoForm .date::before {
   content: '📆';
 }
 
@@ -292,6 +286,7 @@ button:hover {
   justify-content: flex-start;
   gap: 1em;
   width: 100%;
+  margin-top: 1em;
 }
 
 /* common to newListForm and newTodoForm */
@@ -314,10 +309,6 @@ button:hover {
 
 /* expanded Todo */
 .expTodo {
-  display: none;
-}
-
-.expTodo.show {
   display: block;
   padding: 1em;
   border-radius: 1em;
@@ -415,11 +406,12 @@ button:hover {
     box-shadow: red 0px 0px 12px;
   }
 
-  .expTodo.show {
+  .expTodo {
     width: max-content;
   }
 
-  .widgetsContainer .date::before {
-    content: '';
+  .newTodoForm {
+    top: 50%;
+    transform: translate(-50%, -50%); /* Centering trick */
   }
 }

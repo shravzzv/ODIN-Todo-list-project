@@ -10,7 +10,7 @@ Todo lists are a staple in beginning webdev tutorials because they can be very s
 
 This project is completed as a part of [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-todo-list)'s curriculum.
 
-![the homepage](https://res.cloudinary.com/dmt9s5xlh/image/upload/v1694664903/restaurant-homepage_dh2ov6.jpg)
+![the homepage on laptop](https://res.cloudinary.com/dmt9s5xlh/image/upload/v1695913134/todos_laptop_nxm6s8.png)
 
 [View Demo](https://odin-todo-list-project.vercel.app/)
 
