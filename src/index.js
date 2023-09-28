@@ -90,17 +90,18 @@ document.addEventListener('DOMContentLoaded', () => {
   content.appendChild(Logo())
 
   content.appendChild(Tabs(lists))
-  content.appendChild(NewListModal())
 
   content.appendChild(Todos(todos))
-  content.appendChild(NewTodoModal())
 
   content.appendChild(AddTodo())
 
   // event handlers
 
+  // lists
   const handleOpenNewListForm = (e) => {
-    document.querySelector('.newListForm').classList.add('show')
+    // append newListModel to the DOM
+    content.appendChild(NewListModal())
+
     // set autofocus on the input
     setTimeout(() => {
       const input = document.querySelector('.newListForm>input')
@@ -109,8 +110,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 0)
 
+    // hide addList button
+    document.querySelector('.addListBtn').style.display = 'none'
+
     // hide addTodo button
     document.querySelector('.addTodo').style.display = 'none'
+
+    // add eventlistener to close the form on the form's cancel button
+    document
+      .querySelector('.newListForm .cancel')
+      .addEventListener('click', handleCloseNewListForm)
+
+    // add evenlisteners to submit the form
+    document
+      .querySelector('.newListForm')
+      .addEventListener('submit', handleListSubmit)
 
     // remove eventlisteners from shortTodos to prevent further clicks
     document
@@ -119,7 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const handleCloseNewListForm = (e) => {
-    document.querySelector('.newListForm').classList.remove('show')
+    // remove the form from DOM
+    document.querySelector('.newListForm').remove()
+
+    // expose addList button
+    document.querySelector('.addListBtn').style.display = 'block'
 
     // expose addTodo button
     document.querySelector('.addTodo').style.display = 'block'
@@ -128,22 +146,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document
       .querySelectorAll('.shortTodo')
       .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
-
-    // reset the form
-    e.target.form.reset()
   }
 
   const handleListSubmit = (e) => {
     e.preventDefault()
 
-    // hide the modal
-    document.querySelector('.newListForm').classList.remove('show')
-
     // create new list using List class
     const newList = new List(e.target.elements.tab.value)
     lists.push(newList)
 
-    // add new .tab button inside .tabsContainer
+    // add new tab element inside tabsContainer
     const newTabEl = document.createElement('button')
     newTabEl.className = 'tab'
     newTabEl.textContent = newList.title
@@ -152,17 +164,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabsContainer = document.querySelector('.tabsContainer')
     tabsContainer.appendChild(newTabEl)
 
+    // expose addLists button
+    document.querySelector('.addListBtn').style.display = 'block'
+
     // expose addTodo button
     document.querySelector('.addTodo').style.display = 'block'
+
     // reattach eventlisteners on shortTodos
     document
       .querySelectorAll('.shortTodo')
       .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
 
-    // reset the form
-    e.target.reset()
+    // remove the form from the DOM
+    document.querySelector('.newListForm').remove()
   }
 
+  // todos
   const handleOpenNewTodoForm = (e) => {
     document.querySelector('.newTodoForm').classList.add('show')
     // set autofocus on the title input
@@ -291,14 +308,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // event listeners
 
-  const addListBtn = document.querySelector('.addListBtn')
-  addListBtn.addEventListener('click', handleOpenNewListForm)
-
-  const canceNewListBtn = document.querySelector('.newListForm .cancel')
-  canceNewListBtn.addEventListener('click', handleCloseNewListForm)
-
-  const newListForm = document.querySelector('.newListForm')
-  newListForm.addEventListener('submit', handleListSubmit)
+  document
+    .querySelector('.addListBtn')
+    .addEventListener('click', handleOpenNewListForm)
 
   const addTodoBtn = document.querySelector('.addTodo')
   addTodoBtn.addEventListener('click', handleOpenNewTodoForm)
@@ -331,3 +343,14 @@ document.addEventListener('DOMContentLoaded', () => {
 //
 
 // ! Problem: newTodoForm is appened to the DOM unnecessarily
+// ! Problem: newly created tabs aren't being shown in the todo modal
+
+// Plan:
+// when addTodoBtn is clicked, append the model to the document with the latest tabs as arguments
+// ! Problem: eventListeners associated with newTodoModal might not work
+
+// * Remove unnecssary models from the DOM
+// ? Understand
+// Currently, the newList and newTodo forms are appended to the DOM and a class .show is being changed using event handlers to show or hide them.
+// Instead of this, append the form only when the button is clicked and when it is canceled, remove the form from the DOM.
+// You need to remove the .show class and update the CSS.

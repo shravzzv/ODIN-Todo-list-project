@@ -1,4 +1,4 @@
-const NewTodoModal = () => {
+const NewTodoModal = (lists) => {
   const element = document.createElement('form')
   element.className = 'newTodoForm'
 
@@ -47,12 +47,10 @@ const NewTodoModal = () => {
   listInput.name = 'list'
   listInput.className = 'list'
 
-  const tabs = ['Inbox', 'Personal', 'Work']
-
-  tabs.forEach((tab) => {
+  lists.forEach((tab) => {
     const option = document.createElement('option')
-    option.value = tab
-    option.text = tab
+    option.value = tab.title
+    option.text = tab.title
     listInput.appendChild(option)
   })
 

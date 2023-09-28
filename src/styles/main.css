@@ -215,19 +215,15 @@ button:hover {
 
 /* new List modal */
 .newListForm {
-  margin: auto;
   padding: 1em;
   background-color: var(--bg-clr-sec);
   border-radius: var(--bdr-radius-prm);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  display: none;
-}
 
-.newListForm.show {
   position: fixed;
-  top: 30%; /* Vertically center */
+  top: 30%;
   left: 50%; /* Horizontally center */
-  transform: translate(-50%, -50%); /* Centering trick */
+  transform: translate(-50%); /* horizontally Centering trick */
 
   display: flex;
   flex-wrap: wrap;
