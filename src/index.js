@@ -13,35 +13,42 @@ import ExpandedTodo from './components/expandedTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
-  const lists = [new List('inbox'), new List('personal'), new List('work')]
+  const lists = [new List('inbox')]
   const todos = [
     new Todo(
-      'Read chapter 5 of Sapiens',
-      'Continue reading the fascinating book "Sapiens" by Yuval Noah Harari.',
+      'Create a Todo',
+      'Click the + button at the bottom right of the screen.',
       new Date(),
-      '⭐',
-      'work'
-    ),
-    new Todo(
-      'Go for a jog',
-      'Get some exercise by going for a jog in the morning.',
-      new Date('2023-09-28'),
-      '⭐',
-      'personal'
-    ),
-    new Todo(
-      'Learn about JavaScript promises',
-      'Dive deeper into JavaScript promises and asynchronous programming.',
-      new Date('2023-09-30'),
       '⭐⭐⭐',
-      'work'
+      'Inbox'
     ),
     new Todo(
-      'Write a blog post',
-      'Start writing a blog post about web development tips and tricks.',
-      new Date('2023-09-28'),
-      '⭐⭐',
-      'inbox'
+      'Create a List',
+      'Click the + button next to the tabs bar above. Now create a new todo and select this list.',
+      new Date(),
+      '⭐⭐⭐',
+      'Inbox'
+    ),
+    new Todo(
+      'Complete a Todo',
+      'Click the circle on any todo to mark it as completed.',
+      new Date(),
+      '⭐⭐⭐',
+      'Inbox'
+    ),
+    new Todo(
+      'Navigate using tabs',
+      'Click on any of the available tabs to filter the todos.',
+      new Date(),
+      '⭐⭐⭐',
+      'Inbox'
+    ),
+    new Todo(
+      'Clear this screen',
+      'Open each todo and click the 🗑️ icon.',
+      new Date(),
+      '⭐⭐⭐',
+      'Inbox'
     ),
   ]
 
