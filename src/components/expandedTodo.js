@@ -35,7 +35,7 @@ const ExpandedTodo = ({ title, desc, due, priority, list, complete }) => {
   section.className = 'section'
 
   const dateEl = document.createElement('button')
-  dateEl.textContent = `${due.getDate()}:${due.getMonth()}`
+  dateEl.textContent = `${due.getDate()}/${due.getMonth()}/${due.getFullYear()}`
   dateEl.className = 'date'
 
   const priorityEl = document.createElement('button')
