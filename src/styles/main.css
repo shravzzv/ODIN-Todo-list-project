@@ -209,7 +209,8 @@ button:hover {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 1.5em;
+  justify-content: flex-end;
+  gap: 1em;
 }
 
 .shortTodo .subContainer > button {
@@ -398,7 +399,7 @@ select {
 
   .todosContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   }
 
   .addTodo {
@@ -415,7 +416,7 @@ select {
   }
 
   .expTodo {
-    width: max-content;
+    width: max(40vw, 500px);
   }
 
   .newTodoForm {
