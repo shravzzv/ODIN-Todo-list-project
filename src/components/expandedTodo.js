@@ -1,14 +1,12 @@
-const ExpandedTodo = ({ title, desc, due, priority, list }) => {
+const ExpandedTodo = ({ title, desc, due, priority, list, complete }) => {
   const element = document.createElement('div')
   element.className = 'expTodo'
+  if (complete) element.classList.add('complete')
 
   const header = document.createElement('header')
 
   const listEl = document.createElement('button')
   listEl.textContent = list
-
-  // const editBtn = document.createElement('button')
-  // editBtn.textContent = '📝'
 
   const delBtn = document.createElement('button')
   delBtn.textContent = '🗑️'
@@ -19,8 +17,6 @@ const ExpandedTodo = ({ title, desc, due, priority, list }) => {
   closeBtn.className = 'close'
 
   const main = document.createElement('main')
-  const completeCircle = document.createElement('div')
-  completeCircle.className = 'completeCircle'
 
   const textContent = document.createElement('div')
   const titleEl = document.createElement('h1')
@@ -55,7 +51,6 @@ const ExpandedTodo = ({ title, desc, due, priority, list }) => {
   header.appendChild(delBtn)
   header.appendChild(closeBtn)
 
-  main.appendChild(completeCircle)
   main.appendChild(textContent)
 
   textContent.appendChild(titleEl)

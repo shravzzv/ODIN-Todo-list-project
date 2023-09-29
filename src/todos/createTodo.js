@@ -1,6 +1,7 @@
 import completeTodo from './completeTodo'
 import addTodoToList from './addTodoToList'
 import changeTodoPriority from './changeTodoPriority'
+import uncompleteTodo from './uncompleteTodo'
 
 class Todo {
   constructor(title, desc, due, priority, list) {
@@ -14,6 +15,10 @@ class Todo {
 
   markComplete() {
     completeTodo(this)
+  }
+
+  markIncomplete() {
+    uncompleteTodo(this)
   }
 
   addToList(list) {

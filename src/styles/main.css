@@ -136,8 +136,8 @@ button:hover {
 }
 
 .tabsContainer > button:hover {
-  background-color: var(--txt-clr-prm);
-  color: var(--bg-clr-prm);
+  box-shadow: red 0px 0px 10px 0px;
+  transform: translateY(0);
 }
 
 .addListBtn {
@@ -345,6 +345,10 @@ select {
   gap: 1em;
 }
 
+.expTodo.complete > main {
+  text-decoration: line-through;
+}
+
 .expTodo .title {
   margin-bottom: 0;
 }
@@ -378,6 +382,10 @@ select {
 }
 
 .completeCircle:hover {
+  border-color: green;
+}
+
+.completeCircle.complete {
   border-color: green;
 }
 
