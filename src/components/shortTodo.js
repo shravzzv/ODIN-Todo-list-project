@@ -1,3 +1,5 @@
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 const ShortTodo = ({ title, desc, due, priority, list }) => {
   const element = document.createElement('div')
   element.className = 'shortTodo'
@@ -24,7 +26,9 @@ const ShortTodo = ({ title, desc, due, priority, list }) => {
   subContainer.className = 'subContainer'
 
   const dateEl = document.createElement('button')
-  dateEl.textContent = `${due.getDate()}/${due.getMonth()}/${due.getFullYear()}`
+  dateEl.textContent = formatDistanceToNow(due, {
+    addSuffix: true,
+  })
   dateEl.className = 'date'
 
   const priorityEl = document.createElement('button')

@@ -1,3 +1,5 @@
+import formatRelative from 'date-fns/formatRelative'
+
 const ExpandedTodo = ({ title, desc, due, priority, list, complete }) => {
   const element = document.createElement('div')
   element.className = 'expTodo'
@@ -35,7 +37,7 @@ const ExpandedTodo = ({ title, desc, due, priority, list, complete }) => {
   section.className = 'section'
 
   const dateEl = document.createElement('button')
-  dateEl.textContent = `${due.getDate()}/${due.getMonth()}/${due.getFullYear()}`
+  dateEl.textContent = formatRelative(due, new Date())
   dateEl.className = 'date'
 
   const priorityEl = document.createElement('button')

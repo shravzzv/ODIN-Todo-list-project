@@ -209,7 +209,8 @@ button:hover {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 1em;
 }
 
 .shortTodo .subContainer > button {

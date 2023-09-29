@@ -16,30 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const lists = [new List('inbox'), new List('personal'), new List('work')]
   const todos = [
     new Todo(
-      'Complete project proposal',
-      'Hello, World!',
-      new Date('2023-09-30'),
-      '⭐⭐',
-      'home'
-    ),
-    new Todo(
       'Read chapter 5 of Sapiens',
       'Continue reading the fascinating book "Sapiens" by Yuval Noah Harari.',
-      new Date('2023-09-25'),
+      new Date(),
       '⭐',
       'work'
     ),
     new Todo(
       'Go for a jog',
       'Get some exercise by going for a jog in the morning.',
-      new Date('2023-09-24'),
+      new Date('2023-09-28'),
       '⭐',
       'personal'
     ),
     new Todo(
       'Learn about JavaScript promises',
       'Dive deeper into JavaScript promises and asynchronous programming.',
-      new Date('2023-09-26'),
+      new Date('2023-09-30'),
       '⭐⭐⭐',
       'work'
     ),
