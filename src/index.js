@@ -244,6 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.todosContainer').appendChild(newTodoEl)
     newTodoEl.addEventListener('click', handleOpenTodo)
 
+    // add complete circle's functionality
+    newTodoEl.children[0].addEventListener('click', handleCompleteClick)
+
     // expose addLists button
     document.querySelector('.addListBtn').style.display = 'block'
 
@@ -262,6 +265,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // remove the form from the DOM
     document.querySelector('.newTodoForm').remove()
+  }
+
+  // for a tab
+  const handleTabClick = (e) => {
+    // reset by displaying all todos
+    Array.from(document.querySelectorAll('.shortTodo')).forEach(
+      (todo) => (todo.style.display = 'flex')
+    )
+
+    Array.from(document.querySelectorAll('.tab')).forEach((tab) =>
+      tab.classList.remove('active')
+    )
+
+    e.currentTarget.classList.add('active')
+
+    // hide all todos whose list is not the clicked tab
+    Array.from(document.querySelectorAll('.list'))
+      .filter(
+        (list) =>
+          list.textContent.toLowerCase() !==
+          e.currentTarget.textContent.toLowerCase()
+      )
+      .forEach((list) => {
+        // Ensure you're not modifying the body element
+        if (list.parentNode.parentNode.parentNode !== document.body) {
+          list.parentNode.parentNode.parentNode.style.display = 'none'
+        }
+      })
   }
 
   // for a todo
@@ -339,32 +370,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.addTodo').style.display = 'block'
   }
 
-  // for a tab
-  const handleTabClick = (e) => {
-    // reset by displaying all todos
-    Array.from(document.querySelectorAll('.shortTodo')).forEach(
-      (todo) => (todo.style.display = 'flex')
+  const handleCompleteClick = (e) => {
+    e.stopPropagation()
+    const index = Array.from(document.querySelectorAll('.shortTodo')).indexOf(
+      e.currentTarget.parentNode
     )
 
-    Array.from(document.querySelectorAll('.tab')).forEach((tab) =>
-      tab.classList.remove('active')
-    )
+    if (todos[index].complete === false) {
+      // strike-through the shortTodo
+      e.currentTarget.parentNode.style['text-decoration'] = 'line-through'
 
-    e.currentTarget.classList.add('active')
+      // update the complete circle
+      e.currentTarget.style['border-color'] = 'green'
 
-    // hide all todos whose list is not the clicked tab
-    Array.from(document.querySelectorAll('.list'))
-      .filter(
-        (list) =>
-          list.textContent.toLowerCase() !==
-          e.currentTarget.textContent.toLowerCase()
-      )
-      .forEach((list) => {
-        // Ensure you're not modifying the body element
-        if (list.parentNode.parentNode.parentNode !== document.body) {
-          list.parentNode.parentNode.parentNode.style.display = 'none'
-        }
-      })
+      // mark associated todo as complete:true
+      todos[index].markComplete()
+    } else {
+      e.currentTarget.parentNode.style['text-decoration'] = 'none'
+
+      e.currentTarget.style['border-color'] = 'var(--txt-clr-prm)'
+
+      todos[index].markIncomplete()
+    }
   }
 
   // event listeners
@@ -384,4 +411,28 @@ document.addEventListener('DOMContentLoaded', () => {
   document
     .querySelectorAll('.tab')
     .forEach((tab) => tab.addEventListener('click', handleTabClick))
+
+  document
+    .querySelectorAll('.completeCircle')
+    .forEach((circle) => circle.addEventListener('click', handleCompleteClick))
 })
+
+// todo: Mark todos as complete
+
+// ?Understand
+// When I click the complete circle on each short or expanded todo, nothing happnes. I want to change this.
+// When a complete circle is clicked, I want to change that todo's completed to true and hide it from the screen.
+// In a special tab called completed tabs, show the todo's with completed true.
+// For those, also modify CSS to use a checkmark in the completed circle and strikethrough the title.
+
+// ?Plan
+// When the completeCircle is clicked, strikethrough the shortTodo's contents.
+// Mark the associated todo's completed as true.
+
+// Completing a todo can be similar to deleting a todo. Just as when you click the delete button on an expanded todo, clicking on the completeCircle should remove the element from the DOM and update its associated todo.
+
+// // !Problem: Completed shortTodos on opening don't retain their completed features.
+// // !Problem: Newly created shortTodos don't have completeTodo event listener attached
+// // !Problem: shortTodo and expTodo have differnt hierarcy levels for deleting using a common parentNode shortTodo > .completeCircle; .expTodo > main > .completeCircle; this means that e.target.parentNode.parentNode.remove() works only for shortTodo
+
+// !Problem: Uncomplete a todo feature isn't added
