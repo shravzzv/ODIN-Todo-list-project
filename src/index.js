@@ -100,6 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document
       .querySelectorAll('.tab')
       .forEach((tab) => tab.removeEventListener('click', handleTabClick))
+
+    // prevent completing todos while form is present
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.removeEventListener('click', handleCompleteClick)
+      )
   }
 
   const handleCloseNewListForm = (e) => {
@@ -121,6 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document
       .querySelectorAll('.shortTodo')
       .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
+
+    // allow completing todos
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.addEventListener('click', handleCompleteClick)
+      )
   }
 
   const handleListSubmit = (e) => {
@@ -155,6 +169,13 @@ document.addEventListener('DOMContentLoaded', () => {
       .querySelectorAll('.shortTodo')
       .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
 
+    // allow completing todos
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.addEventListener('click', handleCompleteClick)
+      )
+
     // remove the form from the DOM
     document.querySelector('.newListForm').remove()
   }
@@ -188,6 +209,13 @@ document.addEventListener('DOMContentLoaded', () => {
       .querySelectorAll('.tab')
       .forEach((tab) => tab.removeEventListener('click', handleTabClick))
 
+    // prevent completing todos while form is present
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.removeEventListener('click', handleCompleteClick)
+      )
+
     // add eventlistener to close the form
     document
       .querySelector('.newTodoForm .cancel')
@@ -218,6 +246,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document
       .querySelectorAll('.shortTodo')
       .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
+
+    // allow completing todos
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.addEventListener('click', handleCompleteClick)
+      )
   }
 
   const handleTodoSubmit = (e) => {
@@ -262,6 +297,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document
       .querySelectorAll('.shortTodo')
       .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
+
+    // allow completing todos
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.addEventListener('click', handleCompleteClick)
+      )
 
     // remove the form from the DOM
     document.querySelector('.newTodoForm').remove()
@@ -315,6 +357,13 @@ document.addEventListener('DOMContentLoaded', () => {
       .querySelectorAll('.tab')
       .forEach((tab) => tab.removeEventListener('click', handleTabClick))
 
+    // prevent completing todos while form is present
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.removeEventListener('click', handleCompleteClick)
+      )
+
     // hide addListBtn and addTodoBtn
     document.querySelector('.addListBtn').style.display = 'none'
     document.querySelector('.addTodo').style.display = 'none'
@@ -342,6 +391,13 @@ document.addEventListener('DOMContentLoaded', () => {
       .querySelectorAll('.tab')
       .forEach((tab) => tab.addEventListener('click', handleTabClick))
 
+    // allow completing todos
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.addEventListener('click', handleCompleteClick)
+      )
+
     // expose addListBtn and addTodoBtn
     document.querySelector('.addListBtn').style.display = 'block'
     document.querySelector('.addTodo').style.display = 'block'
@@ -365,6 +421,13 @@ document.addEventListener('DOMContentLoaded', () => {
       .querySelectorAll('.tab')
       .forEach((tab) => tab.addEventListener('click', handleTabClick))
 
+    // allow completing todos
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.addEventListener('click', handleCompleteClick)
+      )
+
     // expose addListBtn and addTodoBtn
     document.querySelector('.addListBtn').style.display = 'block'
     document.querySelector('.addTodo').style.display = 'block'
@@ -377,20 +440,15 @@ document.addEventListener('DOMContentLoaded', () => {
     )
 
     if (todos[index].complete === false) {
-      // strike-through the shortTodo
-      e.currentTarget.parentNode.style['text-decoration'] = 'line-through'
-
-      // update the complete circle
-      e.currentTarget.style['border-color'] = 'green'
-
-      // mark associated todo as complete:true
+      // mark todo as completed
       todos[index].markComplete()
+      e.currentTarget.parentNode.style['text-decoration'] = 'line-through'
+      e.currentTarget.style['border-color'] = 'green'
     } else {
-      e.currentTarget.parentNode.style['text-decoration'] = 'none'
-
-      e.currentTarget.style['border-color'] = 'var(--txt-clr-prm)'
-
+      // mark todo as incomplete
       todos[index].markIncomplete()
+      e.currentTarget.parentNode.style['text-decoration'] = 'none'
+      e.currentTarget.style['border-color'] = 'var(--txt-clr-prm)'
     }
   }
 
@@ -416,23 +474,3 @@ document.addEventListener('DOMContentLoaded', () => {
     .querySelectorAll('.completeCircle')
     .forEach((circle) => circle.addEventListener('click', handleCompleteClick))
 })
-
-// todo: Mark todos as complete
-
-// ?Understand
-// When I click the complete circle on each short or expanded todo, nothing happnes. I want to change this.
-// When a complete circle is clicked, I want to change that todo's completed to true and hide it from the screen.
-// In a special tab called completed tabs, show the todo's with completed true.
-// For those, also modify CSS to use a checkmark in the completed circle and strikethrough the title.
-
-// ?Plan
-// When the completeCircle is clicked, strikethrough the shortTodo's contents.
-// Mark the associated todo's completed as true.
-
-// Completing a todo can be similar to deleting a todo. Just as when you click the delete button on an expanded todo, clicking on the completeCircle should remove the element from the DOM and update its associated todo.
-
-// // !Problem: Completed shortTodos on opening don't retain their completed features.
-// // !Problem: Newly created shortTodos don't have completeTodo event listener attached
-// // !Problem: shortTodo and expTodo have differnt hierarcy levels for deleting using a common parentNode shortTodo > .completeCircle; .expTodo > main > .completeCircle; this means that e.target.parentNode.parentNode.remove() works only for shortTodo
-
-// !Problem: Uncomplete a todo feature isn't added
