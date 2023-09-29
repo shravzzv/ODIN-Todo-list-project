@@ -415,7 +415,7 @@ select {
   }
 
   .expTodo {
-    width: max-content;
+    width: max(40vw, 500px);
   }
 
   .newTodoForm {
