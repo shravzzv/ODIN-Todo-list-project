@@ -269,6 +269,7 @@ button:hover {
   margin-bottom: 1em;
 }
 
+input[type='datetime-local'],
 input[type='date'],
 select {
   background-color: var(--bg-clr-prm);
