@@ -13,11 +13,21 @@ import ExpandedTodo from './components/expandedTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
-  const lists = JSON.parse(localStorage.getItem('lists')) || [new List('inbox')]
-  const todos = JSON.parse(localStorage.getItem('todos'))?.map(
-    (todo) =>
-      new Todo(todo.title, todo.desc, todo.due, todo.priority, todo.list)
-  ) || [
+  const lists = JSON.parse(localStorage.getItem('lists'))?.map(
+    (list) => new List(list)
+  ) || [new List('inbox')]
+
+  const todos = JSON.parse(localStorage.getItem('todos'))?.map((todo) => {
+    let newTodo = new Todo(
+      todo.title,
+      todo.desc,
+      todo.due,
+      todo.priority,
+      todo.list
+    )
+    if (todo.complete) newTodo.markComplete()
+    return newTodo
+  }) || [
     new Todo(
       'Create a Todo',
       'Click the + button at the bottom right of the screen.',
@@ -54,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'Inbox'
     ),
   ]
+
   const disableBackgroundEvents = () => {
     // hide addList button
     document.querySelector('.addListBtn').style.display = 'none'
@@ -78,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         circle.removeEventListener('click', handleCompleteClick)
       )
   }
+
   const enableBackgroundEvents = () => {
     // expose addList button
     document.querySelector('.addListBtn').style.display = 'block'
