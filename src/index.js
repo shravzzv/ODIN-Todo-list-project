@@ -51,6 +51,54 @@ document.addEventListener('DOMContentLoaded', () => {
       'Inbox'
     ),
   ]
+  const disableBackgroundEvents = () => {
+    // hide addList button
+    document.querySelector('.addListBtn').style.display = 'none'
+
+    // hide addTodo button
+    document.querySelector('.addTodo').style.display = 'none'
+
+    // remove eventlisteners from shortTodos to prevent further clicks
+    document
+      .querySelectorAll('.shortTodo')
+      .forEach((todo) => todo.removeEventListener('click', handleOpenTodo))
+
+    // remove eventlisteners from tabs to prevent further clicks
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.removeEventListener('click', handleTabClick))
+
+    // prevent completing todos while form is present
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.removeEventListener('click', handleCompleteClick)
+      )
+  }
+  const enableBackgroundEvents = () => {
+    // expose addList button
+    document.querySelector('.addListBtn').style.display = 'block'
+
+    // expose addTodo button
+    document.querySelector('.addTodo').style.display = 'block'
+
+    // reattach eventlisteners on tabs
+    document
+      .querySelectorAll('.tab')
+      .forEach((tab) => tab.addEventListener('click', handleTabClick))
+
+    // reattach eventlisteners on shortTodos
+    document
+      .querySelectorAll('.shortTodo')
+      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
+
+    // allow completing todos
+    document
+      .querySelectorAll('.completeCircle')
+      .forEach((circle) =>
+        circle.addEventListener('click', handleCompleteClick)
+      )
+  }
 
   content.appendChild(Logo())
 
@@ -75,11 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 0)
 
-    // hide addList button
-    document.querySelector('.addListBtn').style.display = 'none'
-
-    // hide addTodo button
-    document.querySelector('.addTodo').style.display = 'none'
+    disableBackgroundEvents()
 
     // add eventlistener to close the form on the form's cancel button
     document
@@ -90,51 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document
       .querySelector('.newListForm')
       .addEventListener('submit', handleListSubmit)
-
-    // remove eventlisteners from shortTodos to prevent further clicks
-    document
-      .querySelectorAll('.shortTodo')
-      .forEach((todo) => todo.removeEventListener('click', handleOpenTodo))
-
-    // remove eventlisteners from tabs to prevent further clicks
-    document
-      .querySelectorAll('.tab')
-      .forEach((tab) => tab.removeEventListener('click', handleTabClick))
-
-    // prevent completing todos while form is present
-    document
-      .querySelectorAll('.completeCircle')
-      .forEach((circle) =>
-        circle.removeEventListener('click', handleCompleteClick)
-      )
   }
 
   const handleCloseNewListForm = (e) => {
     // remove the form from DOM
     document.querySelector('.newListForm').remove()
 
-    // expose addList button
-    document.querySelector('.addListBtn').style.display = 'block'
-
-    // expose addTodo button
-    document.querySelector('.addTodo').style.display = 'block'
-
-    // reattach eventlisteners on tabs
-    document
-      .querySelectorAll('.tab')
-      .forEach((tab) => tab.addEventListener('click', handleTabClick))
-
-    // reattach eventlisteners on shortTodos
-    document
-      .querySelectorAll('.shortTodo')
-      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
-
-    // allow completing todos
-    document
-      .querySelectorAll('.completeCircle')
-      .forEach((circle) =>
-        circle.addEventListener('click', handleCompleteClick)
-      )
+    enableBackgroundEvents()
   }
 
   const handleListSubmit = (e) => {
@@ -153,28 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabsContainer = document.querySelector('.tabsContainer')
     tabsContainer.appendChild(newTabEl)
 
-    // expose addLists button
-    document.querySelector('.addListBtn').style.display = 'block'
-
-    // expose addTodo button
-    document.querySelector('.addTodo').style.display = 'block'
-
-    // reattach eventlisteners on tabs
-    document
-      .querySelectorAll('.tab')
-      .forEach((tab) => tab.addEventListener('click', handleTabClick))
-
-    // reattach eventlisteners on shortTodos
-    document
-      .querySelectorAll('.shortTodo')
-      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
-
-    // allow completing todos
-    document
-      .querySelectorAll('.completeCircle')
-      .forEach((circle) =>
-        circle.addEventListener('click', handleCompleteClick)
-      )
+    enableBackgroundEvents()
 
     // remove the form from the DOM
     document.querySelector('.newListForm').remove()
@@ -193,28 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 0)
 
-    // hide addTodo button
-    document.querySelector('.addTodo').style.display = 'none'
-
-    // hide addList button
-    document.querySelector('.addListBtn').style.display = 'none'
-
-    // remove eventlisteners from shortTodos to prevent further clicks
-    document
-      .querySelectorAll('.shortTodo')
-      .forEach((todo) => todo.removeEventListener('click', handleOpenTodo))
-
-    // remove eventlisteners from tabs to prevent further clicks
-    document
-      .querySelectorAll('.tab')
-      .forEach((tab) => tab.removeEventListener('click', handleTabClick))
-
-    // prevent completing todos while form is present
-    document
-      .querySelectorAll('.completeCircle')
-      .forEach((circle) =>
-        circle.removeEventListener('click', handleCompleteClick)
-      )
+    disableBackgroundEvents()
 
     // add eventlistener to close the form
     document
@@ -231,28 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // remove the form from DOM
     document.querySelector('.newTodoForm').remove()
 
-    // expose addList button
-    document.querySelector('.addListBtn').style.display = 'block'
-
-    // expose addTodo button
-    document.querySelector('.addTodo').style.display = 'block'
-
-    // reattach eventlisteners on tabs
-    document
-      .querySelectorAll('.tab')
-      .forEach((tab) => tab.addEventListener('click', handleTabClick))
-
-    // reattach eventlisteners on shortTodos
-    document
-      .querySelectorAll('.shortTodo')
-      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
-
-    // allow completing todos
-    document
-      .querySelectorAll('.completeCircle')
-      .forEach((circle) =>
-        circle.addEventListener('click', handleCompleteClick)
-      )
+    enableBackgroundEvents()
   }
 
   const handleTodoSubmit = (e) => {
@@ -282,28 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // add complete circle's functionality
     newTodoEl.children[0].addEventListener('click', handleCompleteClick)
 
-    // expose addLists button
-    document.querySelector('.addListBtn').style.display = 'block'
-
-    // expose addTodo button
-    document.querySelector('.addTodo').style.display = 'block'
-
-    // reattach eventlisteners on tabs
-    document
-      .querySelectorAll('.tab')
-      .forEach((tab) => tab.addEventListener('click', handleTabClick))
-
-    // reattach eventlisteners on shortTodos
-    document
-      .querySelectorAll('.shortTodo')
-      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
-
-    // allow completing todos
-    document
-      .querySelectorAll('.completeCircle')
-      .forEach((circle) =>
-        circle.addEventListener('click', handleCompleteClick)
-      )
+    enableBackgroundEvents()
 
     // remove the form from the DOM
     document.querySelector('.newTodoForm').remove()
@@ -347,26 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newExpTodo = ExpandedTodo(todos[index])
     content.appendChild(newExpTodo)
 
-    // remove eventlisteners from shortTodos to prevent further clicks
-    document
-      .querySelectorAll('.shortTodo')
-      .forEach((todo) => todo.removeEventListener('click', handleOpenTodo))
-
-    // remove eventlisteners from tabs to prevent further clicks
-    document
-      .querySelectorAll('.tab')
-      .forEach((tab) => tab.removeEventListener('click', handleTabClick))
-
-    // prevent completing todos while form is present
-    document
-      .querySelectorAll('.completeCircle')
-      .forEach((circle) =>
-        circle.removeEventListener('click', handleCompleteClick)
-      )
-
-    // hide addListBtn and addTodoBtn
-    document.querySelector('.addListBtn').style.display = 'none'
-    document.querySelector('.addTodo').style.display = 'none'
+    disableBackgroundEvents()
 
     // add cancel button functionality
     const cancelBtn = document.querySelector('.expTodo .close')
@@ -381,26 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // .expTodo .header .close
     e.target.parentNode.parentNode.remove()
 
-    // reattach eventlisteners on shortTodos
-    document
-      .querySelectorAll('.shortTodo')
-      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
-
-    // reattach eventlisteners on tabs
-    document
-      .querySelectorAll('.tab')
-      .forEach((tab) => tab.addEventListener('click', handleTabClick))
-
-    // allow completing todos
-    document
-      .querySelectorAll('.completeCircle')
-      .forEach((circle) =>
-        circle.addEventListener('click', handleCompleteClick)
-      )
-
-    // expose addListBtn and addTodoBtn
-    document.querySelector('.addListBtn').style.display = 'block'
-    document.querySelector('.addTodo').style.display = 'block'
+    enableBackgroundEvents()
   }
 
   const handleDeleteTodo = (e, index) => {
@@ -411,26 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Array.from(document.querySelectorAll('.shortTodo'))[index].remove()
     todos.splice(index, 1)
 
-    // reattach eventlisteners on shortTodos
-    document
-      .querySelectorAll('.shortTodo')
-      .forEach((todo) => todo.addEventListener('click', handleOpenTodo))
-
-    // reattach eventlisteners on tabs
-    document
-      .querySelectorAll('.tab')
-      .forEach((tab) => tab.addEventListener('click', handleTabClick))
-
-    // allow completing todos
-    document
-      .querySelectorAll('.completeCircle')
-      .forEach((circle) =>
-        circle.addEventListener('click', handleCompleteClick)
-      )
-
-    // expose addListBtn and addTodoBtn
-    document.querySelector('.addListBtn').style.display = 'block'
-    document.querySelector('.addTodo').style.display = 'block'
+    enableBackgroundEvents()
   }
 
   const handleCompleteClick = (e) => {
