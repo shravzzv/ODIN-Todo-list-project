@@ -26,7 +26,7 @@ const ShortTodo = ({ title, desc, due, priority, list }) => {
   subContainer.className = 'subContainer'
 
   const dateEl = document.createElement('button')
-  dateEl.textContent = formatDistanceToNow(due, {
+  dateEl.textContent = formatDistanceToNow(new Date(due), {
     addSuffix: true,
   })
   dateEl.className = 'date'
