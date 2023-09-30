@@ -13,8 +13,11 @@ import ExpandedTodo from './components/expandedTodo'
 
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
-  const lists = [new List('inbox')]
-  const todos = [
+  const lists = JSON.parse(localStorage.getItem('lists')) || [new List('inbox')]
+  const todos = JSON.parse(localStorage.getItem('todos'))?.map(
+    (todo) =>
+      new Todo(todo.title, todo.desc, todo.due, todo.priority, todo.list)
+  ) || [
     new Todo(
       'Create a Todo',
       'Click the + button at the bottom right of the screen.',
@@ -100,10 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
       )
   }
 
-  // add todos and lists to localStorage
-  localStorage.setItem('lists', JSON.stringify(lists))
-  localStorage.setItem('todos', JSON.stringify(todos))
-
   content.appendChild(Logo())
 
   content.appendChild(Tabs(lists))
@@ -153,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // create new list using List class
     const newList = new List(e.target.elements.tab.value)
     lists.push(newList)
+    localStorage.setItem('lists', JSON.stringify(lists))
 
     // add new tab element inside tabsContainer
     const newTabEl = document.createElement('button')
@@ -220,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
       newList
     )
     todos.push(newTodo)
+    localStorage.setItem('todos', JSON.stringify(todos))
 
     // add a new shortTodo inside the todosContainer
     const newTodoEl = ShortTodo(newTodo)
@@ -298,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // remove associated shortTodo and todo
     Array.from(document.querySelectorAll('.shortTodo'))[index].remove()
     todos.splice(index, 1)
+    localStorage.setItem('todos', JSON.stringify(todos))
 
     enableBackgroundEvents()
   }
@@ -311,11 +313,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (todos[index].complete === false) {
       // mark todo as completed
       todos[index].markComplete()
+      localStorage.setItem('todos', JSON.stringify(todos))
       e.currentTarget.parentNode.style['text-decoration'] = 'line-through'
       e.currentTarget.style['border-color'] = 'green'
     } else {
       // mark todo as incomplete
       todos[index].markIncomplete()
+      localStorage.setItem('todos', JSON.stringify(todos))
       e.currentTarget.parentNode.style['text-decoration'] = 'none'
       e.currentTarget.style['border-color'] = 'var(--txt-clr-prm)'
     }
@@ -343,3 +347,17 @@ document.addEventListener('DOMContentLoaded', () => {
     .querySelectorAll('.completeCircle')
     .forEach((circle) => circle.addEventListener('click', handleCompleteClick))
 })
+
+// todo: use localStorage to store user todos and lists
+
+// ?Understand:
+// Currently, I initialize two arrays: todos and lists. These are used to display the data and are manipulated accordingly.
+// But when the page is refereshed, todos and lists don't retain any of their changes. They go back to their intialized states.
+// I wanna use localStorage to prevent this intialization on refreshing. That means I receive todos and lists from the localStorage and set them in it when manipulated.
+
+// *Plan:
+// When the DOMContentLoaded, get todos and lists from the localStorage and use them to display the todos and lists.
+//
+
+// !Problem: But there aren't any todos and lists in localStorage the first time the page is loaded.
+// !Problem:
