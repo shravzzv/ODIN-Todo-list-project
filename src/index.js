@@ -14,7 +14,7 @@ import ExpandedTodo from './components/expandedTodo'
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content')
   const lists = JSON.parse(localStorage.getItem('lists'))?.map(
-    (list) => new List(list)
+    (list) => new List(list.title)
   ) || [new List('inbox')]
 
   const todos = JSON.parse(localStorage.getItem('todos'))?.map((todo) => {
