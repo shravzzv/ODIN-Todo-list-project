@@ -162,14 +162,28 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
 
     // create new list using List class
-    const newList = new List(e.target.elements.tab.value)
-    lists.push(newList)
+    let newListTitle = e.target.elements.tab.value.toLowerCase()
+
+    // prevent duplicate lists
+    if (lists.map((list) => list.title).includes(newListTitle)) {
+      newListTitle = prompt(
+        `List ${newListTitle} already exists. Choose another name:`
+      )
+
+      if (newListTitle === null) {
+        enableBackgroundEvents()
+        document.querySelector('.newListForm').remove()
+        return
+      }
+    }
+
+    lists.push(new List(newListTitle))
     localStorage.setItem('lists', JSON.stringify(lists))
 
     // add new tab element inside tabsContainer
     const newTabEl = document.createElement('button')
     newTabEl.className = 'tab'
-    newTabEl.textContent = newList.title
+    newTabEl.textContent = newListTitle
     newTabEl.addEventListener('click', handleTabClick)
 
     const tabsContainer = document.querySelector('.tabsContainer')
