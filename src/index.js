@@ -100,6 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
       )
   }
 
+  // add todos and lists to localStorage
+  localStorage.setItem('lists', JSON.stringify(lists))
+  localStorage.setItem('todos', JSON.stringify(todos))
+
   content.appendChild(Logo())
 
   content.appendChild(Tabs(lists))
