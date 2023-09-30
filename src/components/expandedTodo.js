@@ -37,7 +37,7 @@ const ExpandedTodo = ({ title, desc, due, priority, list, complete }) => {
   section.className = 'section'
 
   const dateEl = document.createElement('button')
-  dateEl.textContent = formatRelative(due, new Date())
+  dateEl.textContent = formatRelative(new Date(due), new Date())
   dateEl.className = 'date'
 
   const priorityEl = document.createElement('button')

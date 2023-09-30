@@ -1,11 +1,17 @@
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const ShortTodo = ({ title, desc, due, priority, list }) => {
+const ShortTodo = ({ title, desc, due, priority, list, complete }) => {
   const element = document.createElement('div')
   element.className = 'shortTodo'
+  if (complete) {
+    element.style['text-decoration'] = 'line-through'
+  }
 
   const compCircle = document.createElement('div')
   compCircle.className = 'completeCircle'
+  if (complete) {
+    compCircle.style['border-color'] = 'green'
+  }
 
   const contents = document.createElement('div')
   contents.className = 'contents'
@@ -26,7 +32,7 @@ const ShortTodo = ({ title, desc, due, priority, list }) => {
   subContainer.className = 'subContainer'
 
   const dateEl = document.createElement('button')
-  dateEl.textContent = formatDistanceToNow(due, {
+  dateEl.textContent = formatDistanceToNow(new Date(due), {
     addSuffix: true,
   })
   dateEl.className = 'date'
