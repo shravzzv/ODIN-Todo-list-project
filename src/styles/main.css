@@ -117,7 +117,7 @@ button:hover {
   display: none;
 }
 
-.tabsContainer > button {
+.tab {
   background-color: var(--bg-clr-prm);
   color: var(--txt-clr-prm);
   border-radius: var(--bdr-radius-prm);
@@ -135,7 +135,7 @@ button:hover {
   box-shadow: red 0px 0px 10px 0px;
 }
 
-.tabsContainer > button:hover {
+.tab:hover {
   box-shadow: red 0px 0px 10px 0px;
   transform: translateY(0);
 }
