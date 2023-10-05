@@ -57,6 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
       'Inbox'
     ),
     new Todo(
+      'Delete a tab by double-clicking it',
+      'Only empty tabs are allowed to be deleted.',
+      new Date(),
+      '⭐⭐⭐',
+      'Inbox'
+    ),
+    new Todo(
       'Clear this screen',
       'Open each todo and click the 🗑️ icon.',
       new Date(),
@@ -185,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newTabEl.className = 'tab'
     newTabEl.textContent = newListTitle
     newTabEl.addEventListener('click', handleTabClick)
+    newTabEl.addEventListener('dblclick', handleDeleteTab)
 
     const tabsContainer = document.querySelector('.tabsContainer')
     tabsContainer.appendChild(newTabEl)
@@ -290,6 +298,25 @@ document.addEventListener('DOMContentLoaded', () => {
       })
   }
 
+  const handleDeleteTab = (e) => {
+    const index = Array.from(document.querySelectorAll('.tab')).indexOf(
+      e.currentTarget
+    )
+
+    // allow tab removals only if it doesn't have any todos linked
+    const listElOfTodos = Array.from(
+      document.querySelectorAll('.shortTodo .list')
+    ).map((todo) => todo.textContent.toLowerCase())
+
+    if (listElOfTodos.includes(lists[index].title)) {
+      alert('cannot remove this list because it has linked todos')
+    } else {
+      e.target.remove()
+      lists.splice(index, 1)
+      localStorage.setItem('lists', JSON.stringify(lists))
+    }
+  }
+
   // for a todo
   const handleOpenTodo = (e) => {
     const index = Array.from(document.querySelectorAll('.shortTodo')).indexOf(
@@ -370,20 +397,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .forEach((tab) => tab.addEventListener('click', handleTabClick))
 
   document
+    .querySelectorAll('.tab')
+    .forEach((tab) => tab.addEventListener('dblclick', handleDeleteTab))
+
+  document
     .querySelectorAll('.completeCircle')
     .forEach((circle) => circle.addEventListener('click', handleCompleteClick))
 })
-
-// todo: use localStorage to store user todos and lists
-
-// ?Understand:
-// Currently, I initialize two arrays: todos and lists. These are used to display the data and are manipulated accordingly.
-// But when the page is refereshed, todos and lists don't retain any of their changes. They go back to their intialized states.
-// I wanna use localStorage to prevent this intialization on refreshing. That means I receive todos and lists from the localStorage and set them in it when manipulated.
-
-// *Plan:
-// When the DOMContentLoaded, get todos and lists from the localStorage and use them to display the todos and lists.
-//
-
-// !Problem: But there aren't any todos and lists in localStorage the first time the page is loaded.
-// !Problem:
