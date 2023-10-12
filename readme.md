@@ -16,8 +16,12 @@ This project is completed as a part of [The Odin Project](https://www.theodinpro
 
 ## Features
 
-- Add todos
-- Mark todos as completed
+- Add todos with a **title**, **description**, **due date**, **importance** in three levels as ⭐⭐⭐, ⭐⭐ or ⭐.
+- Add todos to **lists**.
+- **Filter** todos using lists.
+- Mark todos as **completed** by clicking on the ⚪.
+- Remove todos using the 🗑️ button.
+- Remove lists by **double clicking** them.
 
 ## Installation
 
